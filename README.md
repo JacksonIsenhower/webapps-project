@@ -1,1 +1,1 @@
-# webapps-project-1
+# Project 1 for Cedarville Web Applications class
