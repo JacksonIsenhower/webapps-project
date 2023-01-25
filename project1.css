@@ -1,0 +1,132 @@
+body {
+	background-color: rgb(0, 10, 120);
+	
+	display: grid;
+	grid-template-columns: 250px auto;
+	grid-template-rows: 100px auto 208px;
+	grid-template-areas:
+		"header header"
+		"requirements plan"
+		"validation course-finder";
+	justify-content: stretch;
+	align-content: stretch;
+	height: 100%;
+}
+
+button {
+	background-color: rgb(220, 190, 50);
+}
+
+button:hover {
+	background-color: rgb(190, 155, 50);
+	cursor: pointer;
+}
+
+#title {
+	color: gold;
+	font-size: 24pt;
+	font-family: impact;
+	position: relative;
+	top: -24px;
+}
+
+#version {
+	color: gold;
+	font-size: 24pt;
+	font-family: impact;
+	position: relative;
+	top: -24px;
+}
+
+#header {
+	height: 60px;
+	width: 99%;
+	padding: 5px;
+	border: 4px solid aqua;
+	border-radius: 5px;
+	position: relative;
+	grid-area: header;
+}
+
+#headerItems {
+	position: relative;
+	top: -103px;
+	float: right;
+	width: 400px;
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-template-rows: 20px 20px 20px;
+	grid-template-areas:
+		"student major logout"
+		"catalog minor options"
+		". . save";
+	
+	color: lightblue;
+	font-family: arial;
+	font-size: 0.8em;
+}
+
+#student {
+	grid-area: student;
+}
+
+#major {
+	grid-area: major;
+}
+
+#logout {
+	grid-area: logout;
+}
+
+#catalog {
+	grid-area: catalog;
+}
+
+#minor {
+	grid-area: minor;
+}
+
+#options {
+	grid-area: options;
+}
+
+#save {
+	grid-area: save;
+}
+
+.grid-item {
+	color: white;
+	font-family: arial;
+	
+	padding: 5px;
+	border: 4px solid aqua;
+	border-radius: 5px;
+}
+
+#plan-requirements-container {
+	float: left;
+	grid-area: requirements;
+}
+
+#plan-container {
+	float: right;
+	
+	overflow-y: auto;
+	grid-area: plan;
+}
+
+#plan-validation-container {
+	float: left;
+	bottom: 0;
+	grid-area: validation;
+}
+
+#course-finder-container {
+	float: right;
+    height: 208px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-size: 80%;
+	bottom: 0;
+	grid-area: course-finder;
+}
