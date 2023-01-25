@@ -36,9 +36,9 @@ body {
 	list-style-type: none;
 }
 
-.year {
+.semester-title {
 	float: left;
 }
-.hours {
+.semester-hours {
 	float: right;
 }
