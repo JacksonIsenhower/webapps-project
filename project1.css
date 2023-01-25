@@ -1,0 +1,25 @@
+body {
+	margin: 0px;
+}
+
+.grid-container {
+	display: grid;
+	grid-template-columns: 250px auto;
+	margin: 0px;
+}
+
+.grid-item {
+	text-align: center;
+	background: white;
+	border: 1px solid lightblue;
+	padding: 10px;
+	margin: 0px;
+}
+
+#sidebar-container {
+	border-bottom: 0px;
+}
+
+#left-footer-container {
+	border-top: 0px;
+}	
