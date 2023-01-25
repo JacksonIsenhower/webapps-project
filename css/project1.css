@@ -26,7 +26,19 @@ body {
 
 .schedule-container {
 	display: grid;
-	grid-template-columns: auto auto auto;
-	background-color: grey;
+	grid-template-columns: 33% 34% 33%;
+	background-color: lightgrey;
 	justify-content: space-between;
+	text-align: left;
+}
+
+.course-list {
+	list-style-type: none;
+}
+
+.year {
+	float: left;
+}
+.hours {
+	float: right;
 }
