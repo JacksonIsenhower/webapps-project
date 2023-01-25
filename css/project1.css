@@ -22,4 +22,11 @@ body {
 
 #ll-container {
 	border-top: 0px;
-}	
+}
+
+.schedule-container {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	background-color: grey;
+	justify-content: space-between;
+}
