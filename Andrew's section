@@ -1,11 +1,15 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
+		<title>
+			Andrew's section
+		</title>
 	</head>
 	<body>
 		<div id="requirements">
-			<! -- this needs a high z-index and to be absolute at the left of the page with so many px wide -->
+			<!--this needs a high z-index and to be absolute at the left of the page with so many px wide-->
 				<h2>
-					<! -- this needs to be centered -->
+					<!-- this needs to be centered-->
 					Requirements
 				</h2>
 				<h3>
@@ -28,13 +32,11 @@
 
 		</div>
 		<div id="bottom">
-			<! -- this needs a high z-index and to be absolute at the bottom of the page with so many px tall -->
+			<!--this needs a high z-index and to be absolute at the bottom of the page with so many px tall-->
 			<div id="validation">
-				<! -- this needs to be to the left of of finder -->
+				<!--this needs to be to the left of of finder-->
 				<h3>
-					<p>
-						Validation Status
-					</p>
+					Validation Status
 				</h3>
 				<ul>
 				<li>Missing Important Class</li>
@@ -43,15 +45,11 @@
 				</ul>
 			</div>
 			<div id="finder">
-				<! -- this needs to be to the right of validation, and apply css overflow property for a scroll bar -->
+				<!--this needs to be to the right of validation, and apply css overflow property for a scroll bar-->
 				<h3>
-					<p>
-						Course Finder
-					</p>
+					Course Finder
 				</h3>
-					<p>
-						Showing 1 to 10 of 10 entries
-					</p>
+					Showing 1 to 10 of 10 entries
 				<p>
 					Search: (<a href="https://www.google.com/search?q=clear">clear</a>)
 					<input type="text" placeholder="">
@@ -67,7 +65,7 @@
 					<th>Temporary Class</th>
 					<th>1.0</th>
 					</tr>
-				<table>
+				</table>
 			</div>
 		</div>
 	</body>
