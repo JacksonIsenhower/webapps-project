@@ -9,9 +9,17 @@ header {
 .grid-container {
 	display: grid;
 	grid-template-columns: 250px auto;
-	grid-template-rows: auto 250px;
+	grid-template-rows: auto 200px;
 	margin: 0px;
-	overflow: scroll;
+	overflow: hidden;
+	height: 100vh;
+}
+
+#app-container {
+	min-height: 10vh;
+	max-height: 100vh;
+	overflow: hidden;
+	flex: 1 0 auto;
 }
 
 .grid-item {
@@ -20,6 +28,7 @@ header {
 	border: 1px solid lightblue;
 	padding: 10px;
 	margin: 0px;
+	overflow: auto;
 }
 
 #ul-container {
@@ -28,6 +37,11 @@ header {
 
 #ll-container {
 	border-top: 0px;
+}
+
+#lr-container {
+	height: 100%;
+	overflow: scroll;
 }
 
 .schedule-container {
