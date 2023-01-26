@@ -5,15 +5,11 @@
 		<div id="requirements">
 			<! -- this needs a high z-index and to be absolute at the left of the page with so many px wide -->
 				<h2>
-					<p>
-						<! -- this needs to be centered -->
-						Requirements
-					</p>
+					<! -- this needs to be centered -->
+					Requirements
 				</h2>
 				<h3>
-					<p>
-						Core Classes
-					</p>
+					<span class="triangle"></span>Core Classes
 				</h3>
 				<ul>
 					<li>Hard Class</li>
@@ -21,26 +17,20 @@
 					<li>Easy Class</li>
 				</ul>
 				<h3>
-					<p>
-						Track
-					</p>
+					<span class="triangle"></span>Track
 				</h3>
 				<h3>
-					<p>
-						Required Cognates
-					</p>
+					<span class="triangle"></span>Required Cognates
 				</h3>
 				<h3>
-					<p>
-						GenEds
-					</p>
+					<span class="triangle"></span>GenEds
 				</h3>
 
 		</div>
 		<div id="bottom">
-		<! -- this needs a high z-index and to be absolute at the bottom of the page with so many px tall -->
+			<! -- this needs a high z-index and to be absolute at the bottom of the page with so many px tall -->
 			<div id="validation">
-			<! -- this needs to be to the left of of finder -->
+				<! -- this needs to be to the left of of finder -->
 				<h3>
 					<p>
 						Validation Status
@@ -60,7 +50,7 @@
 					</p>
 				</h3>
 					<p>
-						Showing 1 to 10 entries
+						Showing 1 to 10 of 10 entries
 					</p>
 				<p>
 					Search: (<a href="https://www.google.com/search?q=clear">clear</a>)
