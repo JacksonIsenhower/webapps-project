@@ -41,7 +41,7 @@ header {
 
 #lr-container {
 	height: 100%;
-	overflow: scroll;
+	overflow: auto;
 }
 
 .schedule-container {
@@ -68,6 +68,12 @@ header {
 
 table {
 	width: 100%;
+}
+
+.table {
+	overflow: auto;
+	width:auto; 
+	height:100px;
 }
 
 h3{
