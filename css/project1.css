@@ -9,7 +9,9 @@ header {
 .grid-container {
 	display: grid;
 	grid-template-columns: 250px auto;
+	grid-template-rows: auto 250px;
 	margin: 0px;
+	overflow: auto;
 }
 
 .grid-item {
@@ -38,6 +40,38 @@ header {
 
 .course-list {
 	list-style-type: none;
+}
+
+.required-courses {
+	list-style-type: none;
+	text-align:left;
+}
+
+.validation-courses {
+	list-style-type: none;
+	text-align:left;
+}
+
+table {
+	width: 100%;
+}
+
+.table {
+	overflow: scroll;
+}
+
+h3{
+	text-align:left;
+}
+
+.right-float {
+	font-weight: normal;
+	text-align: right;
+	float: right;
+}
+
+.left-float {
+	float: left;
 }
 
 .semester-title {
