@@ -1,386 +1,387 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
+		<title>Academic Planning Environment</title>
 		<link rel="stylesheet" href="./css/project1.css">
 		<link rel="shortcut icon" href="https://ape.cedarville.edu/img/favicon.ico">
 		<meta name="viewport" content="width=device-width, height=device-height initial-scale=1">
 	</head>
 	<body>
 		<div id="app-container">
-		<header>
-		<div id="header">
-			<span id="title"><em>Academic Planning Environment</em></span>
-			<span id="version"><em>Version 4.0</em></span>
-			<div id="headerItems">
-				<span class="header-column">
-                                        <button id="logout"><strong>Log Out</strong></button>
-                                        <button id="options"><strong>Options</strong></button>
-                                        <button id="save"><strong>Save</strong></button>
-                                </span>
-				<span class="header-column">
-					<span id="major"><strong>Major: </strong>Computer Science</span><br>
-					<span id="minor"><strong>Minor: </strong>Bible</span>
-				</span>
-				<span class="header-column">
-                                        <span id="student"><strong>Student: </strong>johnd</span><br>
-                                        <span id="catalog"><strong>Catalog: </strong>2020</span>
-                                </span>
-			</div>
-		</div>
-		</header>
-		<div class="grid-container">
-			<div class="grid-item" id="ul-container">
-				<div class="section-header">
-					<h2>
-						<!-- this needs to be centered-->
-						Requirements
-					</h2>
-				</div>
-				<h3>
-					<span class="triangle"></span>Core Classes
-				</h3>
-				<ul class="required-courses">
-					<li>Hard Class</li>
-					<li>Medium Class</li>
-					<li>Easy Class</li>
-				</ul>
-				<h3>
-					<span class="triangle"></span>Track
-				</h3>
-				<h3>
-					<span class="triangle"></span>Required Cognates
-				</h3>
-				<h3>
-					<span class="triangle"></span>GenEds
-				</h3>
-			</div>
-			<div class="grid-item" id="ur-container">
-				<div class="section-header">
-					<h2>Academic Plan: plan</h2>
-				</div>
-				<div class="schedule-container">
-					<div class="schedule-year-block">
-						<span class="semester-title">Fall 2020</span>
-						<span class="semester-hours">Hours: 33</span>
-						<br>
-						<ul class="course-list">
-							<li class="course">
-								MATH-1710 Calculus I
-							</li>
-							<li class="course">
-								EGCP-1010 Digital Logic Design
-							</li>
-						</ul>
-					</div>
-					<div class="schedule-year-block">
-						<span class="semester-title">Spring 2021</span>
-						<span class="semester-hours">Hours: 15</span>
-						<br>
-						<ul class="course-list">
-							<li>
-						    		CS-1220 Obj-Orient Design/C++
-							</li>
-						</ul>
-					</div>
-					<div class="schedule-year-block">
-						<span class="semester-title">Summer 2021</span>
-						<span class="semester-hours"></span>
-						<br>
-						<ul class="course-list">
-						</ul>
-					</div>
-					<div class="schedule-year-block">
-						<span class="semester-title">Fall 2021</span>
-						<span class="semester-hours">Hours: 33</span>
-						<br>
-						<ul class="course-list">
-							<li class="course">
-								MATH-1710 Calculus I
-							</li>
-							<li class="course">
-								EGCP-1010 Digital Logic Design
-							</li>
-						</ul>
-					</div>
-					<div class="schedule-year-block">
-						<span class="semester-title">Spring 2022</span>
-						<span class="semester-hours">Hours: 15</span>
-						<br>
-						<ul class="course-list">
-							<li>
-						    		CS-1220 Obj-Orient Design/C++
-							</li>
-						</ul>
-					</div>
-					<div class="schedule-year-block">
-						<span class="semester-title">Summer 2022</span>
-						<span class="semester-hours"></span>
-						<br>
-						<ul class="course-list">
-						</ul>
-					</div>
-					<div class="schedule-year-block">
-						<span class="semester-title">Fall 2022</span>
-						<span class="semester-hours">Hours: 33</span>
-						<br>
-						<ul class="course-list">
-							<li class="course">
-								MATH-1710 Calculus I
-							</li>
-							<li class="course">
-								EGCP-1010 Digital Logic Design
-							</li>
-						</ul>
-					</div>
-					<div class="schedule-year-block">
-						<span class="semester-title">Spring 2023</span>
-						<span class="semester-hours">Hours: 15</span>
-						<br>
-						<ul class="course-list">
-							<li>
-						    		CS-1220 Obj-Orient Design/C++
-							</li>
-						</ul>
-					</div>
-					<div class="schedule-year-block active">
-						<span class="semester-title">Summer 2023</span>
-						<span class="semester-hours"></span>
-						<br>
-						<ul class="course-list">
-						</ul>
-					</div>
-					<div class="schedule-year-block active">
-						<span class="semester-title">Fall 2023</span>
-						<span class="semester-hours">Hours: 33</span>
-						<br>
-						<ul class="course-list">
-							<li class="course">
-								MATH-1710 Calculus I
-							</li>
-							<li class="course">
-								EGCP-1010 Digital Logic Design
-							</li>
-						</ul>
-					</div>
-					<div class="schedule-year-block active">
-						<span class="semester-title">Spring 2024</span>
-						<span class="semester-hours">Hours: 15</span>
-						<br>
-						<ul class="course-list">
-							<li>
-						    		CS-1220 Obj-Orient Design/C++
-							</li>
-						</ul>
-					</div>
-					<div class="schedule-year-block active">
-						<span class="semester-title">Summer 2024</span>
-						<span class="semester-hours"></span>
-						<br>
-						<ul class="course-list">
-						</ul>
+			<header>
+				<div id="header">
+					<span id="title"><em>Academic Planning Environment</em></span>
+					<span id="version"><em>Version 4.0</em></span>
+					<div id="headerItems">
+						<span class="header-column">
+							<button id="logout"><strong>Log Out</strong></button>
+							<button id="options"><strong>Options</strong></button>
+							<button id="save"><strong>Save</strong></button>
+						</span>
+						<span class="header-column">
+							<span id="major"><strong>Major: </strong>Computer Science</span><br>
+							<span id="minor"><strong>Minor: </strong>Bible</span>
+						</span>
+						<span class="header-column">
+							<span id="student"><strong>Student: </strong>johnd</span><br>
+							<span id="catalog"><strong>Catalog: </strong>2020</span>
+						</span>
 					</div>
 				</div>
-				<div class="schedule-ui">
-					<button>Open Notes</button><button>Delete Year</button><button>Add Year</button>
-				</div>
-			</div>
-			<div class="grid-item" id="ll-container">
-				<div class="navigation">
+			</header>
+			<div class="grid-container">
+				<div class="grid-item" id="ul-container">
 					<div class="section-header">
 						<h2>
-							Navigation
+							<!-- this needs to be centered-->
+							Requirements
 						</h2>
 					</div>
-					<ul class="validation-courses">
-						<li><a href="/">Course Page</a></li>
-						<li><a href="../../~mcgraw/cs3220.html">Andrew McGraw</a></li>
-						<li><a href="../../~hubble/cs3220.html">Ian Hubble</a></li>
-						<li><a href="../cs3220.html">Jackson Isenhower</a></li>
+					<h3>
+						<span class="triangle"></span>Core Classes
+					</h3>
+					<ul class="required-courses">
+						<li>Hard Class</li>
+						<li>Medium Class</li>
+						<li>Easy Class</li>
 					</ul>
+					<h3>
+						<span class="triangle"></span>Track
+					</h3>
+					<h3>
+						<span class="triangle"></span>Required Cognates
+					</h3>
+					<h3>
+						<span class="triangle"></span>GenEds
+					</h3>
+				</div>
+				<div class="grid-item" id="ur-container">
+					<div class="section-header">
+						<h2>Academic Plan: plan</h2>
+					</div>
+					<div class="schedule-container">
+						<div class="schedule-year-block">
+							<span class="semester-title">Fall 2020</span>
+							<span class="semester-hours">Hours: 33</span>
+							<br>
+							<ul class="course-list">
+								<li class="course">
+									MATH-1710 Calculus I
+								</li>
+								<li class="course">
+									EGCP-1010 Digital Logic Design
+								</li>
+							</ul>
+						</div>
+						<div class="schedule-year-block">
+							<span class="semester-title">Spring 2021</span>
+							<span class="semester-hours">Hours: 15</span>
+							<br>
+							<ul class="course-list">
+								<li>
+									CS-1220 Obj-Orient Design/C++
+								</li>
+							</ul>
+						</div>
+						<div class="schedule-year-block">
+							<span class="semester-title">Summer 2021</span>
+							<span class="semester-hours"></span>
+							<br>
+							<ul class="course-list">
+							</ul>
+						</div>
+						<div class="schedule-year-block">
+							<span class="semester-title">Fall 2021</span>
+							<span class="semester-hours">Hours: 33</span>
+							<br>
+							<ul class="course-list">
+								<li class="course">
+									MATH-1710 Calculus I
+								</li>
+								<li class="course">
+									EGCP-1010 Digital Logic Design
+								</li>
+							</ul>
+						</div>
+						<div class="schedule-year-block">
+							<span class="semester-title">Spring 2022</span>
+							<span class="semester-hours">Hours: 15</span>
+							<br>
+							<ul class="course-list">
+								<li>
+									CS-1220 Obj-Orient Design/C++
+								</li>
+							</ul>
+						</div>
+						<div class="schedule-year-block">
+							<span class="semester-title">Summer 2022</span>
+							<span class="semester-hours"></span>
+							<br>
+							<ul class="course-list">
+							</ul>
+						</div>
+						<div class="schedule-year-block">
+							<span class="semester-title">Fall 2022</span>
+							<span class="semester-hours">Hours: 33</span>
+							<br>
+							<ul class="course-list">
+								<li class="course">
+									MATH-1710 Calculus I
+								</li>
+								<li class="course">
+									EGCP-1010 Digital Logic Design
+								</li>
+							</ul>
+						</div>
+						<div class="schedule-year-block">
+							<span class="semester-title">Spring 2023</span>
+							<span class="semester-hours">Hours: 15</span>
+							<br>
+							<ul class="course-list">
+								<li>
+									CS-1220 Obj-Orient Design/C++
+								</li>
+							</ul>
+						</div>
+						<div class="schedule-year-block active">
+							<span class="semester-title">Summer 2023</span>
+							<span class="semester-hours"></span>
+							<br>
+							<ul class="course-list">
+							</ul>
+						</div>
+						<div class="schedule-year-block active">
+							<span class="semester-title">Fall 2023</span>
+							<span class="semester-hours">Hours: 33</span>
+							<br>
+							<ul class="course-list">
+								<li class="course">
+									MATH-1710 Calculus I
+								</li>
+								<li class="course">
+									EGCP-1010 Digital Logic Design
+								</li>
+							</ul>
+						</div>
+						<div class="schedule-year-block active">
+							<span class="semester-title">Spring 2024</span>
+							<span class="semester-hours">Hours: 15</span>
+							<br>
+							<ul class="course-list">
+								<li>
+									CS-1220 Obj-Orient Design/C++
+								</li>
+							</ul>
+						</div>
+						<div class="schedule-year-block active">
+							<span class="semester-title">Summer 2024</span>
+							<span class="semester-hours"></span>
+							<br>
+							<ul class="course-list">
+							</ul>
+						</div>
+					</div>
+					<div class="schedule-ui">
+						<button>Open Notes</button><button>Delete Year</button><button>Add Year</button>
+					</div>
+				</div>
+				<div class="grid-item" id="ll-container">
+					<div class="navigation">
+						<div class="section-header">
+							<h2>
+								Navigation
+							</h2>
+						</div>
+						<ul class="validation-courses">
+							<li><a href="/">Course Page</a></li>
+							<li><a href="../../~mcgraw/cs3220.html">Andrew McGraw</a></li>
+							<li><a href="../../~hubble/cs3220.html">Ian Hubble</a></li>
+							<li><a href="../cs3220.html">Jackson Isenhower</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="grid-item" id="lr-container">
+					<p class="right-float">
+						Showing 1 to 10 of 10 entries
+					</p>
+					<h3 class="left-float">
+						Course Finder
+					</h3>
+					<p>
+						Search: (<a href="https://www.google.com/search?q=clear">clear</a>)
+						<input type="text" placeholder="">
+					</p>
+					<div class="table">
+						<table>
+							<tr>
+							<th>Name</th>
+							<th>Title</th>
+							<th>Cred</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+							<tr>
+							<th>TEMP</th>
+							<th>Temporary Class</th>
+							<th>1.0</th>
+							</tr>
+						</table>
+					</div>
 				</div>
 			</div>
-			<div class="grid-item" id="lr-container">
-				<p class="right-float">
-					Showing 1 to 10 of 10 entries
-				</p>
-				<h3 class="left-float">
-					Course Finder
-				</h3>
-				<p>
-					Search: (<a href="https://www.google.com/search?q=clear">clear</a>)
-					<input type="text" placeholder="">
-				</p>
-				<div class="table">
-					<table>
-						<tr>
-						<th>Name</th>
-						<th>Title</th>
-						<th>Cred</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-						<tr>
-						<th>TEMP</th>
-						<th>Temporary Class</th>
-						<th>1.0</th>
-						</tr>
-					</table>
-				</div>
-			</div>
-		</div>
 		</div>
 	</body>
 </html>
