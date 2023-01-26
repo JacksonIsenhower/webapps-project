@@ -2,6 +2,10 @@ body {
 	margin: 0px;
 }
 
+header {
+	overflow: auto;
+}
+
 .grid-container {
 	display: grid;
 	grid-template-columns: 250px auto;
@@ -22,4 +26,32 @@ body {
 
 #ll-container {
 	border-top: 0px;
-}	
+}
+
+.schedule-container {
+	display: grid;
+	grid-template-columns: 33% 34% 33%;
+	background-color: lightgrey;
+	justify-content: space-between;
+	text-align: left;
+}
+
+.course-list {
+	list-style-type: none;
+}
+
+.semester-title {
+	float: left;
+}
+.semester-hours {
+	float: right;
+}
+
+#headerItems {
+	display: inline;
+}
+
+.header-column {
+	display: inline-block;
+	float: right;
+}
