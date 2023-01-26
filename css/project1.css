@@ -40,6 +40,34 @@ header {
 	list-style-type: none;
 }
 
+.required-courses {
+	list-style-type: none;
+	text-align:left;
+}
+
+.validation-courses {
+	list-style-type: none;
+	text-align:left;
+}
+
+table {
+	width: 100%;
+}
+
+h3{
+	text-align:left;
+}
+
+.right-float {
+	font-weight: normal;
+	text-align: right;
+	float: right;
+}
+
+.left-float {
+	float: left;
+}
+
 .semester-title {
 	float: left;
 }
