@@ -4,6 +4,10 @@ body {
 
 header {
 	overflow: auto;
+	margin: 3px;
+	border: 1px solid blue;
+	border-radius: 4px;
+	background-image: linear-gradient(to right, rgb(200, 220, 255), white);
 }
 
 .grid-container {
@@ -51,7 +55,36 @@ header {
 	display: inline;
 }
 
+#title {
+	font-family: impact;
+	color: blue;
+	margin: 4px;
+	font-size: 2em;
+}
+
+#version {
+	font-family: arial;
+	font-size: 0.6em;
+}
+
 .header-column {
 	display: inline-block;
 	float: right;
+	
+	font-family: arial;
+	font-style: strong;
+	font-size: 0.8em;
+	margin: 4px 20px;
+}
+
+.header-column button {
+	font-family: consolas;
+	border-radius: 4px;
+	background-image: linear-gradient(to right, rgb(220, 190, 50), rgb(255, 250, 30));
+}
+
+.header-column button:hover {
+	font-family: consolas;
+	border-radius: 4px;
+	background-image: linear-gradient(to right, rgb(250, 230, 50), rgb(255, 255, 255));
 }
