@@ -1,0 +1,84 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<div id="requirements">
+			<! -- this needs a high z-index and to be absolute at the left of the page with so many px wide -->
+				<h2>
+					<p>
+						<! -- this needs to be centered -->
+						Requirements
+					</p>
+				</h2>
+				<h3>
+					<p>
+						Core Classes
+					</p>
+				</h3>
+				<ul>
+					<li>Hard Class</li>
+					<li>Medium Class</li>
+					<li>Easy Class</li>
+				</ul>
+				<h3>
+					<p>
+						Track
+					</p>
+				</h3>
+				<h3>
+					<p>
+						Required Cognates
+					</p>
+				</h3>
+				<h3>
+					<p>
+						GenEds
+					</p>
+				</h3>
+
+		</div>
+		<div id="bottom">
+		<! -- this needs a high z-index and to be absolute at the bottom of the page with so many px tall -->
+			<div id="validation">
+			<! -- this needs to be to the left of of finder -->
+				<h3>
+					<p>
+						Validation Status
+					</p>
+				</h3>
+				<ul>
+				<li>Missing Important Class</li>
+				<li>Missing Important Class</li>
+				<li>Missing Prerequisite</li>
+				</ul>
+			</div>
+			<div id="finder">
+				<! -- this needs to be to the right of validation, and apply css overflow property for a scroll bar -->
+				<h3>
+					<p>
+						Course Finder
+					</p>
+				</h3>
+					<p>
+						Showing 1 to 10 entries
+					</p>
+				<p>
+					Search: (<a href="https://www.google.com/search?q=clear">clear</a>)
+					<input type="text" placeholder="">
+				</p>
+				<table>
+					<tr>
+					<th>Name</th>
+					<th>Title</th>
+					<th>Cred</th>
+					</tr>
+					<tr>
+					<th>TEMP</th>
+					<th>Temporary Class</th>
+					<th>1.0</th>
+					</tr>
+				<table>
+			</div>
+		</div>
+	</body>
+</html>
