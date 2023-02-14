@@ -209,8 +209,10 @@
 						Course Finder
 					</h3>
 					<p>
-						Search: <u id='clear'>(clear)</u>
-						<input type="text" id="search" placeholder="">
+						<form action="http://judah.cedarville.edu/echo.php" method="post">
+						  Search: <u id='clear'>(clear)</u> <input type="text" id="search" name="search">
+						  <input type="submit" value="Submit">
+						</form>
 					</p>
 					<div class="table">
 						<table id=courselist>
