@@ -14,3 +14,8 @@ function Course(id, name, credits, term, year) {
 	this.term = term;
 	this.year = year;
 };
+
+function Term(semester, courses = []) {
+	this.semester = semester;
+	this.courses = courses;
+}
