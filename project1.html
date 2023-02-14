@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<script src="./js/project2.js"></script>
 		<title>Academic Planning Environment</title>
 		<link rel="stylesheet" href="./css/project1.css">
 		<link rel="shortcut icon" href="https://ape.cedarville.edu/img/favicon.ico">
-		<script src="./js/project2.js"></script>
 		<meta name="viewport" content="width=device-width, height=device-height initial-scale=1">
 	</head>
 	<body>
@@ -57,7 +57,7 @@
 					</h3>
 				</div>
 				<div class="grid-item" id="ur-container">
-					<div class="section-header" id="schedule-header">
+					<div class="section-header">
 						<h2>Academic Plan: plan</h2>
 					</div>
 					<div class="schedule-container">
@@ -202,18 +202,18 @@
 					</div>
 				</div>
 				<div class="grid-item" id="lr-container">
-					<p class="right-float">
+					<p id="showing" class="right-float">
 						Showing 1 to 10 of 10 entries
 					</p>
 					<h3 class="left-float">
 						Course Finder
 					</h3>
 					<p>
-						Search: (<a href="https://www.google.com/search?q=clear">clear</a>)
-						<input type="text" placeholder="">
+						Search: <u id='clear'>(clear)</u>
+						<input type="text" id="search" placeholder="">
 					</p>
 					<div class="table">
-						<table>
+						<table id=courselist>
 							<tr>
 								<td>Name</td>
 								<td>Title</td>
