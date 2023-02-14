@@ -1,4 +1,4 @@
-# Project 1 for Cedarville Web Applications Class
+# Term project for Cedarville Web Applications Class
 ```
 Code
 ```
