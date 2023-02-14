@@ -1,10 +1,10 @@
-let javascriptPlan = {
-	planName: "",
-	catalogueYear: "",
-	major: "",
-	studentName: "",
-	currentSemester: "",
-	courses: []
+function Plan(name, year, major, studentName, currentSemester, courses = []) {
+	this.name = name;
+	this.year = year;
+	this.major = major;
+	this.studentName = studentName;
+	this.currentSemester = currentSemester;
+	this.courses = courses;
 };
 
 function Course(id, name, credits, term, year) {
