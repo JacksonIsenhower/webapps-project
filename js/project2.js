@@ -13,4 +13,4 @@ function Course(id, name, credits, term, year) {
 	this.credits = credits;
 	this.term = term;
 	this.year = year;
-}
+};
