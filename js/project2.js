@@ -49,7 +49,9 @@ function searchCourses(){
 	if (input.match(notValid)){
 		num.innerHTML = ("Invalid input");
 		num.style.color = "red";
+	}
 }
+
 
 function clearCourses(){
 	document.getElementById("search").value = "";
