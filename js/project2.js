@@ -273,9 +273,9 @@ let yellow=false;
 let cyan=false;
 let purple=false;
 async function rainbows(){
-	//black, blue, cyan, green, yellow, red, pink, white, black
+	//black, purple, blue, cyan, green, yellow, red, pink, white, black
 	
-	//alert("rainbows");
+	//225 107 148 pink
 	let a = ($("#colors").val())
 	let r = parseInt(a.slice(1,3), 16);
 	let g = parseInt(a.slice(3,5), 16);
@@ -363,6 +363,10 @@ async function rainbows(){
 	}
 	if (black){
 		b+=1;
+		r+=1;
+	}
+	if (purple){
+		r-=1;
 	}
 	if (blue){
 		g+=1;
@@ -399,7 +403,6 @@ async function r(){
 		rainbows();
 	}
 }
-
 function rgbCombine(r, g, b){
 	let x=r.toString(16);
 	let y=g.toString(16);
@@ -428,11 +431,11 @@ function changeColor(){
 		let colorD = hexShade(colorB,colorA);
 		let colorE = hexBright(colorA,colorA);
 		let colorT = hexText(colorA);
-		let colorB1 = hexAvg(colorB,colorA);
-		let colorC1 = hexAvg(colorC,colorA);
-		let colorD1 = hexAvg(colorD,colorA);
-		let colorE1 = hexAvg(colorE,colorA);
-		let colorT1 = hexAvg(colorT,colorA);
+		//let colorB1 = hexAvg(colorB,colorA);
+		//let colorC1 = hexAvg(colorC,colorA);
+		//let colorD1 = hexAvg(colorD,colorA);
+		//let colorE1 = hexAvg(colorE,colorA);
+		//let colorT1 = hexAvg(colorT,colorA);
 		$("body, h2, div, .active, a").css("color", colorT);
 		$("em").css("color", (hexText(colorT)));
 		$(".grid-item").css('backgroundColor', colorA).css("border","1px solid" +colorT);
