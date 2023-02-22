@@ -491,14 +491,11 @@ let hoverB = "linear-gradient(to right, rgb(250, 230, 50), rgb(255, 255, 255))"
 let basicB = "linear-gradient(to right, rgb(220, 190, 50), rgb(255, 250, 30))";
 let delayTime = 1000000;
 
-
-$(document).ready(init);
-
   function init(){
 
 	
 	if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-		document.getElementById("colorCheck")=checked;
+		document.getElementById("colorCheck").setAttribute("checked", "");
 	}
 	
 	$("button").mouseover(function() {
@@ -547,3 +544,5 @@ $( function() {
 window.onresize = function() {
 	$( "#accordion" ).accordion( "refresh" );
 }
+
+$(document).ready(init);
