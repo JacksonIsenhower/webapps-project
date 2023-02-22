@@ -46,16 +46,26 @@ function planToYears(plan) {
 	let yearFound = false;
 	let termFound = false;
 	let first = true;
+	let planYear = -1;
 	for (let k = 0; k < plan.courses.length; k++) {
+		if (plan.courses[k].term === "Spring" || plan.courses[k].term === "Summer") {
+			planYear = plan.courses[k].year - 1;
+		}
+		else {
+			planYear = plan.courses[k].year;
+		}
 		for (let i = 0; i < years.length; i++) {
-			if (plan.courses[k].year == years[i].year) {
+			if (planYear == years[i].year) {
 				yearFound = true;
 				yearIndex = i;
 			}
 		}
 		if (!yearFound) {
-			years.push(new Year(plan.courses[k].year));
+			years.push(new Year(planYear));
 			yearIndex = years.length - 1;
+			years[yearIndex].terms.push(new Term("Fall"));
+			years[yearIndex].terms.push(new Term("Spring"));
+			years[yearIndex].terms.push(new Term("Summer"));
 		}
 		for (let i = 0; i < years[yearIndex].terms.length; i++) {
 			if (plan.courses[k].term == years[yearIndex].terms[i].semester) {
@@ -86,24 +96,31 @@ function generateScheduleHTML(plan) {
 	let returnHTML = "";
 	let yearsFormatted = planToYears(plan);
 	let present = false;
+	let outputYear;
 	for (let i = 0; i < yearsFormatted.length; i++) {
 		year = yearsFormatted[i];
 		for (let k = 0; k < year.terms.length; k++) {
 			term = year.terms[k];
+			if (term.semester === "Spring" || term.semester === "Summer") {
+				outputYear = year.year + 1;
+			}
+			else {
+				outputYear = year.year;
+			}
 			if (present == false) {
 				returnHTML +=
 					"<div class=\"schedule-year-block\"><span class=\"semester-title\">" +
-					term.semester + " " + year.year +
+					term.semester + " " + outputYear +
 					"</span><span class=\"semester-hours\">Hours: " +
 					sumCreditHours(term.courses) + "</span><br><ul class=\"course-list\">";
-				if (plan.currentSemester == term.semester + " " + year.year) {
+				if (plan.currentSemester == term.semester + " " + outputYear) {
 					present = true;
 				}
 			}
 			else {
 				returnHTML +=
 					"<div class=\"schedule-year-block active\"><span class=\"semester-title\">" +
-					term.semester + " " + year.year +
+					term.semester + " " + outputYear +
 					"</span><span class=\"semester-hours\">Hours: " +
 					sumCreditHours(term.courses) + "</span><br><ul class=\"course-list\">";
 			}
@@ -124,24 +141,28 @@ function generateScheduleHeader(plan) {
 	return returnHTML;
 }
 
+function loadExternalPlan() {
+	let returnPlan = new Plan("John Smith's Plan", 0, "", "John Smith", "");
+}
+
 function loadPlan() {
 	let returnPlan = new Plan("John Smith's Plan", 2020, "Computer Science", "John Smith", "Spring 2023");
 	/*returnPlan.courses.push(new Course(id, name, credits, term, year));*/
 	returnPlan.courses.push(new Course("MATH-1710", "Calculus I", 3, "Fall", 2020));
 	returnPlan.courses.push(new Course("EGCP-1010", "Digital Logic Design", 3, "Fall", 2020));
 	returnPlan.courses.push(new Course("CS-1210", "Intro to C++", 3, "Spring", 2021));
-	returnPlan.courses.push(new Course("", "", 0, "Summer", 2021));
+	//returnPlan.courses.push(new Course("", "", 0, "Summer", 2021));
 	returnPlan.courses.push(new Course("MATH-2710", "Calculus II", 3, "Fall", 2021));
 	returnPlan.courses.push(new Course("CS-1220", "Obj-Orient Design/C++", 3, "Fall", 2021));
 	returnPlan.courses.push(new Course("CS-3220", "Programming Language Survey", 3, "Spring", 2022));
-	returnPlan.courses.push(new Course("", "", 0, "Summer", 2022));
+	//returnPlan.courses.push(new Course("", "", 0, "Summer", 2022));
 	returnPlan.courses.push(new Course("MATH-3710", "Calculus III", 3, "Fall", 2022));
 	returnPlan.courses.push(new Course("PHYS-2110", "General Physics I", 3, "Fall", 2022));
 	returnPlan.courses.push(new Course("CS-3610", "Database Org & Design", 3, "Spring", 2023));
-	returnPlan.courses.push(new Course("", "", 0, "Summer", 2023));
+	//returnPlan.courses.push(new Course("", "", 0, "Summer", 2023));
 	returnPlan.courses.push(new Course("BIO-1115", "Biology 1: Cell Biology", 4, "Fall", 2023));
 	returnPlan.courses.push(new Course("EGCP-3010", "Advanced Digital Logic Design", 3, "Spring", 2024));
-	returnPlan.courses.push(new Course("", "", 0, "Summer", 2024));
+	//returnPlan.courses.push(new Course("", "", 0, "Summer", 2024));
 
 	return returnPlan;
 }
