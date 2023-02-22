@@ -1,3 +1,16 @@
+/*
+ * jQuery UI Accordion 1.8.17
+ *
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Accordion
+ *
+ * Depends:
+ *	jquery.ui.core.js
+ *	jquery.ui.widget.js
+ */
 
 function Plan(name, year, major, studentName, currentSemester, courses = []) {
 	this.name = name;
@@ -515,4 +528,22 @@ $(document).ready(init);
 	//document.getElementById("rainbow").addEventListener("change", clearCourses);
 	//$(".box").css("background-image", "url(" + imageUrl + ")");
 
+}
+
+$( function() {
+    $( "#accordion" ).accordion({
+		active: 1,
+		animate: 100,
+		heightStyle: "fill",
+		classes: {
+			"ui-accordion-header": "accord-header",
+			"ui-accordion-header-active": "accord-active",
+			"ui-accordion-header-collapsed": "accord-collapsed",
+			"ui-accordion-content": "accord-content",
+		}
+	});
+  } );
+  
+window.onresize = function() {
+	$( "#accordion" ).accordion( "refresh" );
 }

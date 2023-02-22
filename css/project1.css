@@ -37,6 +37,7 @@ header {
 
 #ul-container {
 	border-bottom: 0px;
+	overflow: hidden;
 }
 
 #ll-container {
@@ -158,12 +159,14 @@ h3{
 	font-family: consolas;
 	border-radius: 4px;
 	background-image: linear-gradient(to right, rgb(250, 230, 50), rgb(255, 255, 255));
+	cursor: pointer;
 }
 
 .schedule-ui button:hover {
-        font-family: consolas;
-        border-radius: 4px;
-        background-image: linear-gradient(to right, rgb(250, 230, 50), rgb(255, 255, 255));
+	font-family: consolas;
+	border-radius: 4px;
+	background-image: linear-gradient(to right, rgb(250, 230, 50), rgb(255, 255, 255));
+	cursor: pointer;
 }
 
 .section-header h2 {
@@ -177,6 +180,56 @@ h3{
 	background-color: rgb(200, 220, 255);
 	padding: 2px;
 	border-radius: 5px;
+}
+
+#accordion {
+	font-family: arial;
+	text-align: left;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	margin: 2px;
+	background-color: rgb(220, 230, 255);
+}
+
+#accordion div {
+	background-color: rgb(200, 220, 255);
+	padding: 4px;
+	font-size: 100%;
+}
+
+.accord-header {
+	padding: 4px;
+	border: 2px solid black;
+	margin: 2px;
+	border-radius: 4px;
+	background-color: rgb(255, 250, 30);
+}
+
+.accord-active {
+	background-color: rgb(255, 250, 30);
+}
+
+.accord-collapsed {
+	background-color: rgb(220, 190, 50);
+}
+
+.accord-collapsed:hover {
+	background-color: rgb(255, 255, 55);
+	cursor:pointer;
+}
+
+.accord-collapsed:active {
+	background-color: rgb(255, 255, 255);
+	cursor:pointer;
+}
+
+.accord-content {
+	background-color: rgb(200, 220, 255);
+}
+
+.accord-content p {
+	font-size: 80%;
 }
 
 .navigation {
