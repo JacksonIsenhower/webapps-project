@@ -576,10 +576,10 @@ function changeColor(){
 		$("header").css("border","1px solid" +colorE);
 		$("#accordion").css("background-color", colorD);
 		$("#accordion .ui-accordion-content").css("background-color", colorB);
-		$("#accordion .ui-accordion-header-active").css("background-color", colorD).css("color",hexText(colorD));
-		$(".ui-accordion-header-collapsed").css("background-color", colorA).css("background-image", basicC);;
-		$("#accordion .ui-accordion-header-collapsed:hover").css("background-color", colorD);
-		$("#accordion .ui-accordion-header-collapsed:active").css("background-color", colorE);
+		$(".ui-accordion-header-active").css("background-color", colorD);
+		$(".ui-accordion-header-collapsed").css("background-color", colorA).css("background-image","none");
+		$(".ui-accordion-header-collapsed:hover").css("background-color", colorD);
+		$(".ui-accordion-header-collapsed:active").css("background-color", colorE).css("color", hexText(colorD));
 		hoverB = "linear-gradient(to right, "+colorA+", "+colorD+")";
 	} else {
 		$("body, h2, div, .active, a, select").css("color", "black");
@@ -612,8 +612,10 @@ function changeColor(){
 let colorA = '#000000';
 let colorB = '#0000FF';
 let colorC = '#FFFFFF';
-let hoverB = "linear-gradient(to right, rgb(250, 230, 50), rgb(255, 255, 255))"
+let hoverB = "linear-gradient(to right, rgb(250, 230, 50), rgb(255, 255, 255))";
 let basicB = "linear-gradient(to right, rgb(220, 190, 50), rgb(255, 250, 30))";
+let basicC = "linear-gradient(to right, rgb(220, 190, 50), rgb(220, 190, 50))";
+let hoverC = "linear-gradient(to right, rgb(250, 230, 50), rgb(250, 230, 50))"
 let delayTime = 1000000;
 let pageScheduleContainer;
 let pageScheduleHeader;
@@ -625,16 +627,18 @@ function init(){
 	}
 	
 	$("button").mouseover(function() {
-		$(this).css("background-image", hoverB);
-		console.log(this);
+		//$(this).css("background-image", hoverB);
+		changeColor()
 	}).mouseout(function(){
-		$(this).css("background-image", basicB);
+		//$(this).css("background-image", basicB);
+		changeColor()
 	});
 	$("#accordion .ui-accordion-header-collapsed").mouseover(function() {
-		$(this).css("background-image", hoverC);
-		console.log(this);
+		//$(this).css("background-image", hoverC);
+		changeColor()
 	}).mouseout(function(){
-		$(this).css("background-image", basicC);
+		//$(this).css("background-image", basicC);
+		changeColor()
 	});
 
 
@@ -778,9 +782,11 @@ $( function() {
 		heightStyle: "fill",
 		activate: function(event, ui) {
 			$( "#accordion" ).accordion( "refresh" );
+			changeColor();
 		},
 		beforeActivate: function(event, ui) {
 			$( "#accordion" ).accordion( "refresh" );
+			changeColor();
 		}
 	});
   } );
