@@ -572,10 +572,10 @@ function changeColor(){
 		$("header").css("border","1px solid" +colorE);
 		$("#accordion").css("background-color", colorD);
 		$("#accordion .ui-accordion-content").css("background-color", colorB);
-		$("#accordion .ui-accordion-header-active").css("background-color", colorC);
-		$("#accordion .ui-accordion-header-collapsed").css("background-color", colorA);
-		$("#accordion .ui-accordion-header-collapsed:hover").css("background-color", colorD);
-		$("#accordion .ui-accordion-header-collapsed:active").css("background-color", colorE);
+		$(".ui-accordion-header-active").css("background-color", colorD);
+		$(".ui-accordion-header-collapsed").css("background-color", colorA).css("background-image","none");
+		$(".ui-accordion-header-collapsed:hover").css("background-color", colorD);
+		$(".ui-accordion-header-collapsed:active").css("background-color", colorE).css("color", hexText(colorD));
 		hoverB = "linear-gradient(to right, "+colorA+", "+colorD+")";
 	} else {
 		$("body, h2, div, .active, a").css("color", "black");
@@ -593,8 +593,7 @@ function changeColor(){
 		$("h2").css("color","#2779aa");
 		$("input").css("background-image", "").css("backgroundColor","white").css("color","black").css("border","2px groove lightgrey").css("border-radius", "3px");
 		hoverB = "linear-gradient(to right, rgb(250, 230, 50), rgb(255, 255, 255))"
-		hoverC = "linear-gradient(to right, rgb(250, 230, 50), rgb(255, 255, 255))"
-}
+		hoverC = "linear-gradient(to right, rgb(250, 230, 50), rgb(250, 230, 50))"
 		$("#accordion").css("background-color", "rgb(220, 230, 255)");
 		$("#accordion .ui-accordion-content").css("background-color", "rgb(200, 220, 255)");
 		$("#accordion .ui-accordion-header-active").css("background-color", "rgb(255, 250, 30)");
@@ -609,8 +608,10 @@ function changeColor(){
 let colorA = '#000000';
 let colorB = '#0000FF';
 let colorC = '#FFFFFF';
-let hoverB = "linear-gradient(to right, rgb(250, 230, 50), rgb(255, 255, 255))"
+let hoverB = "linear-gradient(to right, rgb(250, 230, 50), rgb(255, 255, 255))";
 let basicB = "linear-gradient(to right, rgb(220, 190, 50), rgb(255, 250, 30))";
+let basicC = "linear-gradient(to right, rgb(220, 190, 50), rgb(220, 190, 50))";
+let hoverC = "linear-gradient(to right, rgb(250, 230, 50), rgb(250, 230, 50))"
 let delayTime = 1000000;
 let pageScheduleContainer;
 let pageScheduleHeader;
@@ -623,13 +624,11 @@ function init(){
 	
 	$("button").mouseover(function() {
 		$(this).css("background-image", hoverB);
-		console.log(this);
 	}).mouseout(function(){
 		$(this).css("background-image", basicB);
 	});
-	$(".ui-accordion-header").mouseover(function() {
+	$("#accordion .ui-accordion-header-collapsed").mouseover(function() {
 		$(this).css("background-image", hoverC);
-		console.log(this);
 	}).mouseout(function(){
 		$(this).css("background-image", basicC);
 	});
@@ -781,9 +780,11 @@ $( function() {
 		heightStyle: "fill",
 		activate: function(event, ui) {
 			$( "#accordion" ).accordion( "refresh" );
+			changeColor();
 		},
 		beforeActivate: function(event, ui) {
 			$( "#accordion" ).accordion( "refresh" );
+			changeColor();
 		}
 	});
   } );
