@@ -141,8 +141,29 @@ function generateScheduleHeader(plan) {
 	return returnHTML;
 }
 
-function loadExternalPlan() {
+function externalPlanHandler() {
 	let returnPlan = new Plan("John Smith's Plan", 0, "", "John Smith", "");
+	let externalPlan = this.response.plan;
+	currentCatalog = this.response.catalog;
+	console.log(currentCatalog);
+	returnPlan.name = externalPlan.name;
+	returnPlan.year = externalPlan.catYear;
+	returnPlan.major = externalPlan.major;
+	returnPlan.currentSemester = "" + externalPlan.currTerm + " " + externalPlan.currYear;
+	returnPlan.studentName = externalPlan.student;
+	let currentCourse;
+	for (let courseKey in externalPlan.courses) {
+		currentCourse = externalPlan.courses[courseKey];
+		returnPlan.courses.push(new Course(
+			currentCourse.id,
+			currentCatalog.courses[courseKey].name,
+			currentCatalog.courses[courseKey].credits,
+			currentCourse.term,
+			currentCourse.year));
+	}
+	currentPlan = returnPlan;
+	pageScheduleContainer.innerHTML = generateScheduleHTML(currentPlan);
+        pageScheduleHeader.innerHTML = generateScheduleHeader(currentPlan);
 }
 
 function loadPlan() {
@@ -511,10 +532,11 @@ let colorC = '#FFFFFF';
 let hoverB = "linear-gradient(to right, rgb(250, 230, 50), rgb(255, 255, 255))"
 let basicB = "linear-gradient(to right, rgb(220, 190, 50), rgb(255, 250, 30))";
 let delayTime = 1000000;
+let pageScheduleContainer;
+let pageScheduleHeader;
+let currentCatalog;
 
-  function init(){
-
-	
+function init(){
 	if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
 		document.getElementById("colorCheck").setAttribute("checked", "");
 	}
@@ -536,11 +558,15 @@ let delayTime = 1000000;
 	document.getElementById("search").addEventListener("keyup", searchCourses);
 	document.getElementById("clear").addEventListener("click", clearCourses);
 	document.getElementById("clear").style.cursor = "pointer";
-	const pageScheduleContainer = document.getElementsByClassName("schedule-container")[0];
-	const pageScheduleHeader = document.getElementById("schedule-header");
-	currentPlan = loadPlan();
-	pageScheduleContainer.innerHTML = generateScheduleHTML(currentPlan);
-	pageScheduleHeader.innerHTML = generateScheduleHeader(currentPlan);
+	pageScheduleContainer = document.getElementsByClassName("schedule-container")[0];
+	pageScheduleHeader = document.getElementById("schedule-header");
+	
+	let xhr = new XMLHttpRequest();
+	xhr.addEventListener("load", externalPlanHandler);
+	xhr.responseType = "json";
+	xhr.open("GET", "http://judah.cedarville.edu/~knoerr/cs3220/termProject/getCombined.php");
+	xhr.send();
+
 	document.getElementById("colors").addEventListener("input", changeColor);
 	document.getElementById("colorCheck").addEventListener("change", changeColor);
 	//document.getElementById("rainbow").addEventListener("change", clearCourses);
