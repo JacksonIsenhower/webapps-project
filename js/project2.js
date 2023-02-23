@@ -164,8 +164,13 @@ function externalPlanHandler() {
 	}
 	currentPlan = returnPlan;
 	pageScheduleContainer.innerHTML = generateScheduleHTML(currentPlan);
-	pageScheduleHeader.innerHTML = generateScheduleHeader(currentPlan);
-	
+
+
+
+	for (const property in (currentCatalog.courses)) {
+		$("tbody").append("<tr><td>"+property+"</td><td>"+currentCatalog.courses[property].name+"</td><td>"+currentCatalog.courses[property].credits+"</td></tr>")
+	}
+	searchCourses();
 	
 }
 
@@ -388,7 +393,6 @@ function hexAvg(a,b){
 	let r2 = parseInt(b.slice(1,3), 16);
 	let g2 = parseInt(b.slice(3,5), 16);
 	let b2 = parseInt(b.slice(5,7), 16);
-	//return ("#"+(Math.floor((r1+r2)/2)).toString(16)+(Math.floor((g1+g2)/2)).toString(16)+(Math.floor((b1+b2)/2)).toString(16))
 	return (rgbCombine(Math.floor((r1+r2)/2),Math.floor((g1+g2)/2),Math.floor((b1+b2)/2)));
 }
 
@@ -408,7 +412,6 @@ async function rainbows(){
 	let r = parseInt(a.slice(1,3), 16);
 	let g = parseInt(a.slice(3,5), 16);
 	let b = parseInt(a.slice(5,7), 16);
-	//alert(a+" "+r+" "+g+" "+b);
 	if ((r==255)&&(g==255)&&(b==255)){
 		white=true;
 		black=false;
@@ -518,12 +521,10 @@ async function rainbows(){
 		b-=1;
 	}
 	
-	//alert(a+" "+r+" "+g+" "+b);
 	let result = rgbCombine(r,g,b);
 	document.getElementById("colors").value = result;
 	changeColor();
 } 
-//need async here.
 async function r(){
 	if (document.getElementById("rainbow").checked){
 		delayTime = (100-(document.getElementById("rainbowSpeed").value))*5;
@@ -547,35 +548,24 @@ function rgbCombine(r, g, b){
 	return ("#"+x+y+z);
 }
 
-	//black, blue, cyan, green, yellow, red, pink, white, black
+	//black, purple, blue, cyan, green, yellow, red, pink, white, black
 
 function changeColor(){
 	if (document.getElementById("colorCheck").checked){	
 		let colorA = ($("#colors").val());
-		//colorB = (hexShade(colorA));
 		let colorB = hexShade(colorA,colorA);
 		let colorC = (hexSub('#DDDDDD', colorA));
-		//colorD = (hexAvg(colorA,hexText(colorA)))
 		let colorD = hexShade(colorB,colorA);
 		let colorE = hexBright(colorA,colorA);
 		let colorT = hexText(colorA);
-		//let colorB1 = hexAvg(colorB,colorA);
-		//let colorC1 = hexAvg(colorC,colorA);
-		//let colorD1 = hexAvg(colorD,colorA);
-		//let colorE1 = hexAvg(colorE,colorA);
-		//let colorT1 = hexAvg(colorT,colorA);
 		$("body, h2, div, .active, a").css("color", colorT);
 		$("em").css("color", (hexText(colorT)));
 		$(".grid-item").css('backgroundColor', colorA).css("border","1px solid" +colorT);
 		$(".schedule-year-block").css('backgroundColor', colorB);
 		$("body").css("backgroundColor", colorA);
-		//$("[class*='header']").css("backgroundColor","black")
 		$("header").css("background-image", "linear-gradient(to right, "+colorT+" , "+colorA+")");
-		//$("button").css("background-image", "linear-gradient(to right, "+colorC+" , "+colorB+")");
 		$("button,input").css("backgroundColor", colorD).css("background-image","none").css("color",hexText(colorD)).css("border","1px solid" +colorE);
 		basicB = "none";
-		//$("input").css("background-image", "linear-gradient(to right, "+colorC+" , "+colorB+")");
-		//$("h2").css("color", colorC);
 		$(".section-header").css("backgroundColor", colorB);
 		$(".active").css("background-color", colorD).css("border","1px solid" +colorE).css("color", hexText(colorD))
 		$("header").css("border","1px solid" +colorE)
@@ -650,12 +640,112 @@ function init(){
 		}
 	}
 	xhr.send();
-
+	
 	document.getElementById("colors").addEventListener("input", changeColor);
 	document.getElementById("colorCheck").addEventListener("change", changeColor);
-	//document.getElementById("rainbow").addEventListener("change", clearCourses);
-	//$(".box").css("background-image", "url(" + imageUrl + ")");
+	klisten0(document.getElementById("year"), "http://judah.cedarville.edu/~gallaghd/ymm/ymmdb.php?fmt=xml");
+	document.getElementById("year").addEventListener("change", klisten1);
+	document.getElementById("make").addEventListener("change", klisten2);
+}
+function klisten0(doc, addr) {
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+	  if (this.readyState == 4 && this.status == 200) {
+		parser = new DOMParser();
+		xmlDoc = parser.parseFromString(xhttp.responseText,"text/xml");
+		//(xhttp.responseText).replace(/['[\]"]+/g, '').split(",")
+		let years = xmlDoc.getElementsByTagName("year")
+		for (let i = 0; i < years.length; i++) {
+			//parser = new DOMParser();
+			//xmlDoc = parser.parseFromString(xhttp.responseText,"text/xml");
+			//const s = new XMLSerializer();
+			//xhttp.responseText
+			//option.text = s.serializeToString(xhttp.responseText);
+			let option = document.createElement("option");
+			option.text = years[i].textContent;
+			option.value = "car";
+			doc.appendChild(option);
+		}
+	}
+	};
+	let option = document.createElement("option");
+	option.text = " ";
+	option.value = "";
+	doc.appendChild(option)
+	xhttp.open("GET", addr, true);
+	xhttp.send();
+  }
+function klisten1(){
+	if (!(document.getElementById("year").value=='')){
+		document.getElementById("make").disabled=false;
+	
+		var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+	  if (this.readyState == 4 && this.status == 200) {
+		parser = new DOMParser();
+		xmlDoc = parser.parseFromString(xhttp.responseText,"text/xml");
+		let makes = xmlDoc.getElementsByTagName("make")
+		for (let i = 0; i < makes.length; i++) {
+			let option = document.createElement("option");
+			let vars = makes[i].textContent.split(" ");
+			option.text = vars[8].trim();
+			option.value = vars[4].trim();
+			document.getElementById("make").appendChild(option);
+		}
+	}
+	};
+	let option = document.createElement("option");
+	option.text = " ";
+	option.value = "";
+	document.getElementById("make").appendChild(option)
+	let t = document.getElementById("year");
+	xhttp.open("GET", "http://judah.cedarville.edu/~gallaghd/ymm/ymmdb.php?fmt=xml&year="+t.options[t.selectedIndex].text, true);
+	xhttp.send();
 
+	} else {
+		clearCars(document.getElementById("make"));
+		clearCars(document.getElementById("model"));
+		document.getElementById("make").disabled=true;
+		document.getElementById("model").disabled=true;
+	}
+}
+function klisten2(){
+	if (!(document.getElementById("make").value=='')){	
+		document.getElementById("make").disabled=false;
+		document.getElementById("model").disabled=false;
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			parser = new DOMParser();
+			xmlDoc = parser.parseFromString(xhttp.responseText,"text/xml");
+			let makes = xmlDoc.getElementsByTagName("model")
+			for (let i = 0; i < makes.length; i++) {
+				let option = document.createElement("option");
+				let vars = makes[i].textContent.split(" ");
+				option.text = vars[8].trim();
+				option.value = vars[4].trim();
+				document.getElementById("model").appendChild(option);
+			}
+		}
+	}
+	let option = document.createElement("option");
+	option.text = " ";
+	option.value = "";
+	document.getElementById("model").appendChild(option)
+	let t = document.getElementById("year");
+	let m =document.getElementById("make");
+	xhttp.open("GET", "http://judah.cedarville.edu/~gallaghd/ymm/ymmdb.php?fmt=xml&year="+t.options[t.selectedIndex].text+"&make="+m.options[m.selectedIndex].value, true);
+	xhttp.send();
+	} else {
+		clearCars(document.getElementById("model"));
+		document.getElementById("model").disabled=true;
+	}
+}
+function clearCars(doc){
+	while (doc.hasChildNodes()){
+		doc.removeChild(doc.firstChild);
+	}
+	
 }
 
 $( function() {
