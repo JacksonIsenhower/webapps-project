@@ -47,6 +47,8 @@ header {
 #lr-container {
 	height: 100%;
 	overflow: auto;
+	font-family: arial;
+	font-size: 80%;
 }
 
 .schedule-container {
@@ -113,9 +115,14 @@ h3{
 
 .semester-title {
 	float: left;
+	padding: 2px;
 }
 .semester-hours {
 	float: right;
+	padding: 2px;
+}
+.course {
+	padding-left: 2px;
 }
 
 #headerItems {
@@ -199,7 +206,7 @@ h3{
 	font-size: 100%;
 }
 
-.accord-header {
+.ui-accordion-header {
 	padding: 4px;
 	border: 2px solid black;
 	margin: 2px;
@@ -207,29 +214,29 @@ h3{
 	background-color: rgb(255, 250, 30);
 }
 
-.accord-active {
+.ui-accordion-header-active {
 	background-color: rgb(255, 250, 30);
 }
 
-.accord-collapsed {
+.ui-accordion-header-collapsed {
 	background-color: rgb(220, 190, 50);
 }
 
-.accord-collapsed:hover {
+.ui-accordion-header-collapsed:hover {
 	background-color: rgb(255, 255, 55);
 	cursor:pointer;
 }
 
-.accord-collapsed:active {
+.ui-accordion-header-collapsed:active {
 	background-color: rgb(255, 255, 255);
 	cursor:pointer;
 }
 
-.accord-content {
+.ui-accordion-content {
 	background-color: rgb(200, 220, 255);
 }
 
-.accord-content p {
+.ui-accordion-content p {
 	font-size: 75%;
 	margin: 2px;
 }

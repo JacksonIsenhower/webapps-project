@@ -568,8 +568,14 @@ function changeColor(){
 		basicB = "none";
 		$(".section-header").css("backgroundColor", colorB);
 		$(".active").css("background-color", colorD).css("border","1px solid" +colorE).css("color", hexText(colorD))
-		$("header").css("border","1px solid" +colorE)
-		hoverB = "linear-gradient(to right, "+colorA+", "+colorD+")"
+		$("header").css("border","1px solid" +colorE);
+		$("#accordion").css("background-color", colorD);
+		$("#accordion .ui-accordion-content").css("background-color", colorB);
+		$("#accordion .ui-accordion-header-active").css("background-color", colorC);
+		$("#accordion .ui-accordion-header-collapsed").css("background-color", colorA);
+		$("#accordion .ui-accordion-header-collapsed:hover").css("background-color", colorD);
+		$("#accordion .ui-accordion-header-collapsed:active").css("background-color", colorE);
+		hoverB = "linear-gradient(to right, "+colorA+", "+colorD+")";
 	} else {
 		$("body, h2, div, .active, a").css("color", "black");
 		$("em").css("color", "blue");
@@ -584,8 +590,14 @@ function changeColor(){
 		$("body").css("backgroundColor","white");
 		$("h2").css("color","#2779aa");
 		$("input").css("background-image", "").css("backgroundColor","white").css("color","black").css("border","2px groove lightgrey").css("border-radius", "3px");
-		hoverB = "linear-gradient(to right, rgb(250, 230, 50), rgb(255, 255, 255))"
-}
+		$("#accordion").css("background-color", "rgb(220, 230, 255)");
+		$("#accordion .ui-accordion-content").css("background-color", "rgb(200, 220, 255)");
+		$("#accordion .ui-accordion-header-active").css("background-color", "rgb(255, 250, 30)");
+		$("#accordion .ui-accordion-header-collapsed").css("background-color", "rgb(220, 190, 50)");
+		$("#accordion .ui-accordion-header-collapsed:hover").css("background-color", "rgb(255, 255, 55)");
+		$("#accordion .ui-accordion-header-collapsed:active").css("background-color", "rgb(255, 255, 255)");
+		hoverB = "linear-gradient(to right, rgb(250, 230, 50), rgb(255, 255, 255))";
+	}
 }
 
 
@@ -753,11 +765,11 @@ $( function() {
 		active: 1,
 		animate: 100,
 		heightStyle: "fill",
-		classes: {
-			"ui-accordion-header": "accord-header",
-			"ui-accordion-header-active": "accord-active",
-			"ui-accordion-header-collapsed": "accord-collapsed",
-			"ui-accordion-content": "accord-content",
+		activate: function(event, ui) {
+			$( "#accordion" ).accordion( "refresh" );
+		},
+		beforeActivate: function(event, ui) {
+			$( "#accordion" ).accordion( "refresh" );
 		}
 	});
   } );
