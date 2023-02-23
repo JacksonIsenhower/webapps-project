@@ -67,6 +67,7 @@ header {
 
 .course-list {
 	list-style-type: none;
+	padding-left: 0;
 }
 
 .required-courses {
