@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 		<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 		<script src="./js/project2.js"></script>
@@ -10,6 +9,7 @@
 		<link rel="stylesheet" href="./css/project1.css">
 		<link rel="shortcut icon" href="https://ape.cedarville.edu/img/favicon.ico">
 		<meta name="viewport" content="width=device-width, height=device-height initial-scale=1">
+		<meta charset="utf-8">
 	</head>
 	<body>
 		<div id="app-container">
@@ -73,126 +73,7 @@
 						<h2>Academic Plan: plan</h2>
 					</div>
 					<div class="schedule-container">
-						<div class="schedule-year-block">
-							<span class="semester-title">Fall 2020</span>
-							<span class="semester-hours">Hours: 18</span>
-							<br>
-							<ul class="course-list">
-								<li class="course">
-									MATH-1710 Calculus I
-								</li>
-								<li class="course">
-									EGCP-1010 Digital Logic Design
-								</li>
-							</ul>
-						</div>
-						<div class="schedule-year-block">
-							<span class="semester-title">Spring 2021</span>
-							<span class="semester-hours">Hours: 15</span>
-							<br>
-							<ul class="course-list">
-								<li>
-									CS-1220 Obj-Orient Design/C++
-								</li>
-							</ul>
-						</div>
-						<div class="schedule-year-block">
-							<span class="semester-title">Summer 2021</span>
-							<span class="semester-hours"></span>
-							<br>
-							<ul class="course-list">
-							</ul>
-						</div>
-						<div class="schedule-year-block">
-							<span class="semester-title">Fall 2021</span>
-							<span class="semester-hours">Hours: 15</span>
-							<br>
-							<ul class="course-list">
-								<li class="course">
-									MATH-2710 Calculus II
-								</li>
-								<li class="course">
-									CS-1210 Intro to C++
-								</li>
-							</ul>
-						</div>
-						<div class="schedule-year-block">
-							<span class="semester-title">Spring 2022</span>
-							<span class="semester-hours">Hours: 15</span>
-							<br>
-							<ul class="course-list">
-								<li>
-									CS-3220 Programming Language Survey
-								</li>
-							</ul>
-						</div>
-						<div class="schedule-year-block">
-							<span class="semester-title">Summer 2022</span>
-							<span class="semester-hours"></span>
-							<br>
-							<ul class="course-list">
-							</ul>
-						</div>
-						<div class="schedule-year-block">
-							<span class="semester-title">Fall 2022</span>
-							<span class="semester-hours">Hours: 16</span>
-							<br>
-							<ul class="course-list">
-								<li class="course">
-									MATH-3710 Calculus III
-								</li>
-								<li class="course">
-									EGCP-1010 General Physics
-								</li>
-							</ul>
-						</div>
-						<div class="schedule-year-block">
-							<span class="semester-title">Spring 2023</span>
-							<span class="semester-hours">Hours: 14</span>
-							<br>
-							<ul class="course-list">
-								<li>
-									CS-3610 Database Org & Design
-								</li>
-							</ul>
-						</div>
-						<div class="schedule-year-block active">
-							<span class="semester-title">Summer 2023</span>
-							<span class="semester-hours"></span>
-							<br>
-							<ul class="course-list">
-							</ul>
-						</div>
-						<div class="schedule-year-block active">
-							<span class="semester-title">Fall 2023</span>
-							<span class="semester-hours">Hours: 999</span>
-							<br>
-							<ul class="course-list">
-								<li class="course">
-									MATH-4710 Calculus IV
-								</li>
-								<li class="course">
-									EGCP-4010 Advanced Digital Logic Design
-								</li>
-							</ul>
-						</div>
-						<div class="schedule-year-block active">
-							<span class="semester-title">Spring 2024</span>
-							<span class="semester-hours">Hours: 500</span>
-							<br>
-							<ul class="course-list">
-								<li>
-									PHYS-9999 Basic Quantum Mechanics
-								</li>
-							</ul>
-						</div>
-						<div class="schedule-year-block active">
-							<span class="semester-title">Summer 2024</span>
-							<span class="semester-hours"></span>
-							<br>
-							<ul class="course-list">
-							</ul>
-						</div>
+						No years loaded.
 					</div>
 					<div class="schedule-ui">
 						<button>Open Notes</button><button>Delete Year</button><button>Add Year</button>
@@ -228,12 +109,12 @@
 					<h3 class="left-float">
 						Course Finder
 					</h3>
-					<p>
+					<div class="block-container">
 						<form action="http://judah.cedarville.edu/echo.php" method="post">
 						  Search: <u id='clear'>(clear)</u> <input type="text" id="search" name="search">
 						  <input type="submit" value="Submit">
 						</form>
-					</p>
+					</div>
 					<div class="table">
 						<table id=courselist>
 							<tr>
