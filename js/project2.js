@@ -558,23 +558,26 @@ function changeColor(){
 		let colorD = hexShade(colorB,colorA);
 		let colorE = hexBright(colorA,colorA);
 		let colorT = hexText(colorA);
-		$("body, h2, div, .active, a").css("color", colorT);
+		$("body, h2, div, .active, a, showing").css("color", colorT);
 		$("em").css("color", (hexText(colorT)));
-		$(".grid-item").css('backgroundColor', colorA).css("border","1px solid" +colorT);
+		$(".grid-item, #accordion, .accord-collapsed, .accord-content").css('backgroundColor', colorA).css("border","1px solid" +colorT);
 		$(".schedule-year-block").css('backgroundColor', colorB);
 		$("body").css("backgroundColor", colorA);
 		$("header").css("background-image", "linear-gradient(to right, "+colorT+" , "+colorA+")");
 		$("button,input").css("backgroundColor", colorD).css("background-image","none").css("color",hexText(colorD)).css("border","1px solid" +colorE);
 		basicB = "none";
-		$(".section-header").css("backgroundColor", colorB);
-		$(".active").css("background-color", colorD).css("border","1px solid" +colorE).css("color", hexText(colorD))
+		basicC = "none";
+		$(".section-header, .accord-header, .track").css("backgroundColor", colorB);
+		$(".active, select, .accord-active, .accord-collapsed:active").css("background-color", colorD).css("border","1px solid" +colorE).css("color", hexText(colorD))
 		$("header").css("border","1px solid" +colorE)
 		hoverB = "linear-gradient(to right, "+colorA+", "+colorD+")"
+		hoverC = "linear-gradient(to right, "+colorD+", "+colorD+")"
 	} else {
 		$("body, h2, div, .active, a").css("color", "black");
 		$("em").css("color", "blue");
 		$("button").css("background-image","linear-gradient(to right, rgb(220, 190, 50), rgb(255, 250, 30))").css("color","black").css("border","2px solid black").css("border-radius","4px");
 		basicB = "linear-gradient(to right, rgb(220, 190, 50), rgb(255, 250, 30))";
+		basicC = "linear-gradient(to right, rgb(220, 190, 50), rgb(220, 190, 50))";
 		$(".section-header").css("color","2779aa").css("backgroundColor","rgb(200, 220, 255)");
 		$("#title").css("color","blue");
 		$(".schedule-year-block").css("background-color","rgb(238, 238, 238)").css("border","1px solid rgb(200,200,200)");
@@ -585,6 +588,7 @@ function changeColor(){
 		$("h2").css("color","#2779aa");
 		$("input").css("background-image", "").css("backgroundColor","white").css("color","black").css("border","2px groove lightgrey").css("border-radius", "3px");
 		hoverB = "linear-gradient(to right, rgb(250, 230, 50), rgb(255, 255, 255))"
+		hoverC = "linear-gradient(to right, rgb(250, 230, 50), rgb(255, 255, 255))"
 }
 }
 
@@ -606,9 +610,18 @@ function init(){
 	
 	$("button").mouseover(function() {
 		$(this).css("background-image", hoverB);
+		console.log(this);
 	}).mouseout(function(){
 		$(this).css("background-image", basicB);
 	});
+	$(".ui-accordion-header").mouseover(function() {
+		$(this).css("background-image", hoverC);
+		console.log(this);
+	}).mouseout(function(){
+		$(this).css("background-image", basicC);
+	});
+
+
 	document.getElementById("rainbow").addEventListener("click", r);
 	
 	let amountOfCourses = document.getElementById("courselist").rows.length-1
