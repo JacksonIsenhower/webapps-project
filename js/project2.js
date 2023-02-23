@@ -561,11 +561,11 @@ function init(){
 	
 	document.getElementById("colors").addEventListener("input", changeColor);
 	document.getElementById("colorCheck").addEventListener("change", changeColor);
-	kbb(document.getElementById("year"), "http://judah.cedarville.edu/~gallaghd/ymm/ymmdb.php?fmt=xml");
-	document.getElementById("year").addEventListener("change", klisten);
+	klisten0(document.getElementById("year"), "http://judah.cedarville.edu/~gallaghd/ymm/ymmdb.php?fmt=xml");
+	document.getElementById("year").addEventListener("change", klisten1);
 	document.getElementById("make").addEventListener("change", klisten2);
 }
-function kbb(doc, addr) {
+function klisten0(doc, addr) {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 	  if (this.readyState == 4 && this.status == 200) {
@@ -593,8 +593,9 @@ function kbb(doc, addr) {
 	xhttp.open("GET", addr, true);
 	xhttp.send();
   }
-function klisten(){
+function klisten1(){
 	if (!(document.getElementById("year").value=='')){
+		document.getElementById("make").disabled=false;
 	
 		var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -622,10 +623,14 @@ function klisten(){
 	} else {
 		clearCars(document.getElementById("make"));
 		clearCars(document.getElementById("model"));
+		document.getElementById("make").disabled=true;
+		document.getElementById("model").disabled=true;
 	}
 }
 function klisten2(){
 	if (!(document.getElementById("make").value=='')){	
+		document.getElementById("make").disabled=false;
+		document.getElementById("model").disabled=false;
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
@@ -651,6 +656,7 @@ function klisten2(){
 	xhttp.send();
 	} else {
 		clearCars(document.getElementById("model"));
+		document.getElementById("model").disabled=true;
 	}
 }
 function clearCars(doc){
