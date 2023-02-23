@@ -623,14 +623,18 @@ function init(){
 	}
 	
 	$("button").mouseover(function() {
-		$(this).css("background-image", hoverB);
+		//$(this).css("background-image", hoverB);
+		changeColor()
 	}).mouseout(function(){
-		$(this).css("background-image", basicB);
+		//$(this).css("background-image", basicB);
+		changeColor()
 	});
 	$("#accordion .ui-accordion-header-collapsed").mouseover(function() {
-		$(this).css("background-image", hoverC);
+		//$(this).css("background-image", hoverC);
+		changeColor()
 	}).mouseout(function(){
-		$(this).css("background-image", basicC);
+		//$(this).css("background-image", basicC);
+		changeColor()
 	});
 
 
