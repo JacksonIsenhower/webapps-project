@@ -142,36 +142,35 @@ function generateScheduleHeader(plan) {
 }
 
 function externalPlanHandler() {
-	let returnPlan = new Plan("John Smith's Plan", 0, "", "John Smith", "");
-	let externalPlan = this.response.plan;
-	currentCatalog = this.response.catalog;
-	console.log(currentCatalog);
-	returnPlan.name = externalPlan.name;
-	returnPlan.year = externalPlan.catYear;
-	returnPlan.major = externalPlan.major;
-	returnPlan.currentSemester = "" + externalPlan.currTerm + " " + externalPlan.currYear;
-	returnPlan.studentName = externalPlan.student;
-	let currentCourse;
-	for (let courseKey in externalPlan.courses) {
-		currentCourse = externalPlan.courses[courseKey];
-		returnPlan.courses.push(new Course(
-			currentCourse.id,
-			currentCatalog.courses[courseKey].name,
-			currentCatalog.courses[courseKey].credits,
-			currentCourse.term,
-			currentCourse.year)
-		);
+	if (this.status === 200) {
+		let returnPlan = new Plan("John Smith's Plan", 0, "", "John Smith", "");
+		let externalPlan = this.response.plan;
+		currentCatalog = this.response.catalog;
+		returnPlan.name = externalPlan.name;
+		returnPlan.year = externalPlan.catYear;
+		returnPlan.major = externalPlan.major;
+		returnPlan.currentSemester = "" + externalPlan.currTerm + " " + externalPlan.currYear;
+		returnPlan.studentName = externalPlan.student;
+		let currentCourse;
+		for (let courseKey in externalPlan.courses) {
+			currentCourse = externalPlan.courses[courseKey];
+			returnPlan.courses.push(new Course(
+				currentCourse.id,
+				currentCatalog.courses[courseKey].name,
+				currentCatalog.courses[courseKey].credits,
+				currentCourse.term,
+				currentCourse.year)
+			);
+		}
+		currentPlan = returnPlan;
+		pageScheduleContainer.innerHTML = generateScheduleHTML(currentPlan);
+		pageScheduleHeader.innerHTML = generateScheduleHeader(currentPlan);
+
+		for (const property in (currentCatalog.courses)) {
+			$("tbody").append("<tr><td>"+property+"</td><td>"+currentCatalog.courses[property].name+"</td><td>"+currentCatalog.courses[property].credits+"</td></tr>")
+		}
+		searchCourses();
 	}
-	currentPlan = returnPlan;
-	pageScheduleContainer.innerHTML = generateScheduleHTML(currentPlan);
-
-
-
-	for (const property in (currentCatalog.courses)) {
-		$("tbody").append("<tr><td>"+property+"</td><td>"+currentCatalog.courses[property].name+"</td><td>"+currentCatalog.courses[property].credits+"</td></tr>")
-	}
-	searchCourses();
-	
 }
 
 function loadPlan() {
@@ -180,18 +179,14 @@ function loadPlan() {
 	returnPlan.courses.push(new Course("MATH-1710", "Calculus I", 3, "Fall", 2020));
 	returnPlan.courses.push(new Course("EGCP-1010", "Digital Logic Design", 3, "Fall", 2020));
 	returnPlan.courses.push(new Course("CS-1210", "Intro to C++", 3, "Spring", 2021));
-	//returnPlan.courses.push(new Course("", "", 0, "Summer", 2021));
 	returnPlan.courses.push(new Course("MATH-2710", "Calculus II", 3, "Fall", 2021));
 	returnPlan.courses.push(new Course("CS-1220", "Obj-Orient Design/C++", 3, "Fall", 2021));
 	returnPlan.courses.push(new Course("CS-3220", "Programming Language Survey", 3, "Spring", 2022));
-	//returnPlan.courses.push(new Course("", "", 0, "Summer", 2022));
 	returnPlan.courses.push(new Course("MATH-3710", "Calculus III", 3, "Fall", 2022));
 	returnPlan.courses.push(new Course("PHYS-2110", "General Physics I", 3, "Fall", 2022));
 	returnPlan.courses.push(new Course("CS-3610", "Database Org & Design", 3, "Spring", 2023));
-	//returnPlan.courses.push(new Course("", "", 0, "Summer", 2023));
 	returnPlan.courses.push(new Course("BIO-1115", "Biology 1: Cell Biology", 4, "Fall", 2023));
 	returnPlan.courses.push(new Course("EGCP-3010", "Advanced Digital Logic Design", 3, "Spring", 2024));
-	//returnPlan.courses.push(new Course("", "", 0, "Summer", 2024));
 
 	return returnPlan;
 }
@@ -202,7 +197,7 @@ function isCourseOnPlan(id) {
 		if($courses.eq(i).html().split(" ")[0] == id) {
 			return true;
 		} else {
-			console.log(id);
+			//console.log(id);
 		}
 	}
 	return false;
@@ -210,7 +205,7 @@ function isCourseOnPlan(id) {
 
 function loadRequirements() {
 	let requirements = this.response.categories;
-	console.log(requirements);
+	//console.log(requirements);
 	let currentCourseName = "";
 	
 	// Load Core Classes
