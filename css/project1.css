@@ -230,7 +230,8 @@ h3{
 }
 
 .accord-content p {
-	font-size: 80%;
+	font-size: 75%;
+	margin: 2px;
 }
 
 .navigation {
