@@ -165,6 +165,10 @@ function externalPlanHandler() {
 		currentPlan = returnPlan;
 		pageScheduleContainer.innerHTML = generateScheduleHTML(currentPlan);
 		pageScheduleHeader.innerHTML = generateScheduleHeader(currentPlan);
+		document.getElementById("student").innerHTML = "<strong>Student: </strong>" + externalPlan.student;
+		document.getElementById("catalog").innerHTML = "<strong>Catalog: </strong>" + currentCatalog.year;
+		document.getElementById("major").innerHTML = "<strong>Major: </strong>" + externalPlan.major;
+		//document.getElementById("minor").innerHTML = "<strong>Minor: </strong>" + externalPlan.minor;
 
 		for (const property in (currentCatalog.courses)) {
 			$("tbody").append("<tr><td>"+property+"</td><td>"+currentCatalog.courses[property].name+"</td><td>"+currentCatalog.courses[property].credits+"</td></tr>")
@@ -578,7 +582,7 @@ function changeColor(){
 		$(".ui-accordion-header-collapsed:active").css("background-color", colorE).css("color", hexText(colorD));
 		hoverB = "linear-gradient(to right, "+colorA+", "+colorD+")";
 	} else {
-		$("body, h2, div, .active, a").css("color", "black");
+		$("body, h2, div, .active, a, select").css("color", "black");
 		$("em").css("color", "blue");
 		$("button").css("background-image","linear-gradient(to right, rgb(220, 190, 50), rgb(255, 250, 30))").css("color","black").css("border","2px solid black").css("border-radius","4px");
 		basicB = "linear-gradient(to right, rgb(220, 190, 50), rgb(255, 250, 30))";
@@ -589,17 +593,17 @@ function changeColor(){
 		$(".active").css("background-color","rgb(200, 220, 255)").css("color","#2779aa").css("border","1px solid #2779aa")
 		$(".grid-item").css("background","white").css("border","1px solid lightblue");
 		$("header").css("border","1px solid blue").css("background-image","linear-gradient(to right, rgb(200, 220, 255), white)")
-		$("body").css("backgroundColor","white");
+		$("body, select").css("backgroundColor","white");
 		$("h2").css("color","#2779aa");
 		$("input").css("background-image", "").css("backgroundColor","white").css("color","black").css("border","2px groove lightgrey").css("border-radius", "3px");
 		hoverB = "linear-gradient(to right, rgb(250, 230, 50), rgb(255, 255, 255))"
 		hoverC = "linear-gradient(to right, rgb(250, 230, 50), rgb(250, 230, 50))"
 		$("#accordion").css("background-color", "rgb(220, 230, 255)");
-		$("#accordion .ui-accordion-content").css("background-color", "rgb(200, 220, 255)");
-		$("#accordion .ui-accordion-header-active").css("background-color", "rgb(255, 250, 30)");
-		$("#accordion .ui-accordion-header-collapsed").css("background-color", "rgb(220, 190, 50)");
-		$("#accordion .ui-accordion-header-collapsed:hover").css("background-color", "rgb(255, 255, 55)");
-		$("#accordion .ui-accordion-header-collapsed:active").css("background-color", "rgb(255, 255, 255)");
+		$(".ui-accordion-content").css("background-color", "rgb(200, 220, 255)");
+		$(".ui-accordion-header-active").css("background-color", "rgb(255, 250, 30)").css("color","black");;
+		$(".ui-accordion-header-collapsed").css("background-color", "rgb(220, 190, 50)");
+		$(".ui-accordion-header-collapsed:hover").css("background-color", "rgb(255, 255, 55)");
+		$(".ui-accordion-header-collapsed:active").css("background-color", "rgb(255, 255, 255)");
 		hoverB = "linear-gradient(to right, rgb(250, 230, 50), rgb(255, 255, 255))";
 	}
 }
@@ -682,14 +686,8 @@ function klisten0(doc, addr) {
 	  if (this.readyState == 4 && this.status == 200) {
 		parser = new DOMParser();
 		xmlDoc = parser.parseFromString(xhttp.responseText,"text/xml");
-		//(xhttp.responseText).replace(/['[\]"]+/g, '').split(",")
 		let years = xmlDoc.getElementsByTagName("year")
 		for (let i = 0; i < years.length; i++) {
-			//parser = new DOMParser();
-			//xmlDoc = parser.parseFromString(xhttp.responseText,"text/xml");
-			//const s = new XMLSerializer();
-			//xhttp.responseText
-			//option.text = s.serializeToString(xhttp.responseText);
 			let option = document.createElement("option");
 			option.text = years[i].textContent;
 			option.value = "car";
