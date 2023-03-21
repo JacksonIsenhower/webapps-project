@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<?php   // session2.php
+		session_start();
+		if (isset($_SESSION["loggedin"])) {
+			var TempMajor =
+			var TempMinor =
+			var TempName =
+			var TempYear =
+		} else {
+			header("Location: ./login.php");
+			die();
+		}
+		?>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 		<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -31,12 +43,12 @@
 							<label for="rainbowSpeed">Speed</label>
 						</span>
 						<span class="header-column">
-							<span id="major"><strong>Major: </strong>Computer Science</span><br>
-							<span id="minor"><strong>Minor: </strong>Bible</span>
+							<span id="major"><strong>Major: </strong><var>TempMajor</var></span><br>
+							<span id="minor"><strong>Minor: </strong><var>TempMinor</var></span>
 						</span>
 						<span class="header-column">
-							<span id="student"><strong>Student: </strong>johnd</span><br>
-							<span id="catalog"><strong>Catalog: </strong>2020</span>
+							<span id="student"><strong>Student: </strong><var>TempName</var></span><br>
+							<span id="catalog"><strong>Catalog: </strong><var>TempYear</var></span>
 						</span>
 					</div>
 				</div>
