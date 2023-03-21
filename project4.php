@@ -4,42 +4,8 @@
 		<?php   // session2.php
 		session_start();
 		if (isset($_SESSION["loggedin"])) {
-			if ($stmt = $con->prepare('SELECT "subject" FROM iaj_plan_subjects WHERE plan_id = (select plan_id from iaj_plan where user_id=(select ID from iaj_user where name = ?)) and type = Major')) {
-				$stmt->bind_param('s', $_POST['username']);
-				$stmt->execute();
-				$stmt->store_result();
-			
-				// If there is a username matching, the SQL statement will return at least one row
-				if ($stmt->num_rows > 0) {
-					$stmt->bind_result($id, $password);
-					$stmt->fetch();
-					var TempMajor = $subject
-				}}
-			if ($stmt = $con->prepare('SELECT "subject" FROM iaj_plan_subjects WHERE plan_id = (select plan_id from iaj_plan where user_id=(select ID from iaj_user where name = ?)) and type = Minor')) {
-				$stmt->bind_param('s', $_POST['username']);
-				$stmt->execute();
-				$stmt->store_result();
-			
-				// If there is a username matching, the SQL statement will return at least one row
-				if ($stmt->num_rows > 0) {
-					$stmt->bind_result($id, $password);
-					$stmt->fetch();
-					var TempMinor = $subject
-				}}
-			if ($stmt = $con->prepare('SELECT "year" FROM iaj_plan_courses WHERE plan_id = (select plan_id from iaj_plan where user_id=(select ID from iaj_user where name = ?)) and type = Minor')) {
-				$stmt->bind_param('s', $_POST['username']);
-				$stmt->execute();
-				$stmt->store_result();
-			
-				// If there is a username matching, the SQL statement will return at least one row
-				if ($stmt->num_rows > 0) {
-					$stmt->bind_result($id, $password);
-					$stmt->fetch();
-					var TempYear = $year
-				}}
-				var TempName = $_SESSION["username"]
 		} else {
-			header("Location: ../login.php");
+			header("Location: ../php/project4_loginpage.php");
 			die();
 			//$_SESSION["name"] = "Temp Name";
 			//$_SESSION["id"] = "12345";
