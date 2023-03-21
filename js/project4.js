@@ -163,7 +163,7 @@ function externalPlanHandler() {
 			}
 		}
 		returnPlan.name = externalPlan.name;
-		returnPlan.year = externalPlan.currentYear;
+		returnPlan.year = externalPlan.currYear;
 		returnPlan.major = externalPlan.major;
 		returnPlan.currentSemester = "" + externalPlan.currTerm + " " + externalPlan.currYear;
 		returnPlan.studentName = externalPlan.student;
@@ -184,9 +184,9 @@ function externalPlanHandler() {
 		currentPlan = returnPlan;
 		pageScheduleContainer.innerHTML = generateScheduleHTML(currentPlan);
 		pageScheduleHeader.innerHTML = generateScheduleHeader(currentPlan);
-		document.getElementById("student").innerHTML = "<strong>Student: </strong>" + externalPlan.student;
-		document.getElementById("catalog").innerHTML = "<strong>Catalog: </strong>" + currentCatalog.year;
-		document.getElementById("major").innerHTML = "<strong>Major: </strong>" + externalPlan.major;
+		//document.getElementById("student").innerHTML = "<strong>Student: </strong>" + externalPlan.student;
+		//document.getElementById("catalog").innerHTML = "<strong>Catalog: </strong>" + currentCatalog.year;
+		//document.getElementById("major").innerHTML = "<strong>Major: </strong>" + externalPlan.major;
 		//document.getElementById("minor").innerHTML = "<strong>Minor: </strong>" + externalPlan.minor;
 
 		for (const property in (currentCatalog.courses)) {

@@ -1,4 +1,17 @@
 <?php
+function getCurrentTerm() {
+	$month = idate("m");
+	if ($month > 5) {
+		return "Summer";
+	}
+	else if ($month > 7) {
+		return "Fall";
+	}
+	else {
+		return "Spring";
+	}
+}
+
 session_start();
 
 $DATABASE_HOST = 'localhost';
@@ -29,7 +42,7 @@ if ($stmt = $con->prepare('SELECT iaj_user.name, iaj_plan.plan_id, iaj_plan.plan
 	if ($stmt->num_rows > 0) {
 		$stmt->bind_result($userName, $planID, $planName, $planCatalog, $planDefault);
 		while ($row = $stmt->fetch()) {
-			$plans[$planID] = array("name"=>$planName,"student"=>$userName,"catalog"=>$planCatalog,"default"=>$planDefault,"courses"=>array(),"major"=>"TEMP_MAJOR");
+			$plans[$planID] = array("name"=>$planName,"student"=>$userName,"catalog"=>$planCatalog,"default"=>$planDefault,"courses"=>array(),"major"=>"TEMP_MAJOR","currYear"=>(int)date("Y"),"currTerm"=>getCurrentTerm());
 			
 			if ($courseStmt = $con->prepare('SELECT course_id, year, term FROM iaj_plan_courses WHERE plan_id = ?')) {
 				$courseStmt->bind_param('s', $planID);
