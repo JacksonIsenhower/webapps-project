@@ -164,7 +164,7 @@ function externalPlanHandler() {
 		}
 		returnPlan.name = externalPlan.name;
 		returnPlan.year = externalPlan.currYear;
-		returnPlan.major = externalPlan.major;
+		returnPlan.major = externalPlan.majors[0];
 		returnPlan.currentSemester = "" + externalPlan.currTerm + " " + externalPlan.currYear;
 		returnPlan.studentName = externalPlan.student;
 		let currentCourse;
@@ -227,59 +227,83 @@ function isCourseOnPlan(id) {
 }
 
 function loadRequirements() {
-	let requirements = this.response.categories;
-	//console.log(requirements);
+	let catalogs = this.response;
+	let catalog;
+	for (let catalogKey in catalogs) {
+		currentCatalogThing = catalogs[catalogKey];
+		if (catalogKey == currentPlan.year) {
+			catalog = currentCatalogThing;
+		}
+	}
+	let subjects = catalog.subjects;
+	let focusSubject;
+	for (let subjectKey in subjects) {
+		currentSubject = subjects[subjectKey];
+		if (subjectKey == currentPlan.major) {
+			focusSubject = currentSubject;
+		}
+	}
+	
+	let requirements = focusSubject.categories;
 	let currentCourseName = "";
 	
 	// Load Core Classes
 	let coreHTML = "<p>";
-	for(let course in requirements.Core.courses) {
-		if(isCourseOnPlan(requirements.Core.courses[course])) {
-			coreHTML += "<img src='./images/checkmark.png' width=10 height=10> ";
-		} else {
-			coreHTML += "<img src='./images/x-mark.png' width=10 height=10> ";
+	if (requirements.Core !== undefined) {
+		for(let course in requirements.Core.courses) {
+			if(isCourseOnPlan(requirements.Core.courses[course])) {
+				coreHTML += "<img src='./images/checkmark.png' width=10 height=10> ";
+			} else {
+				coreHTML += "<img src='./images/x-mark.png' width=10 height=10> ";
+			}
+			currentCourseName = currentCatalog.courses[requirements.Core.courses[course]].name;
+			coreHTML += requirements.Core.courses[course] + " " + currentCourseName + "<br>";
 		}
-		currentCourseName = currentCatalog.courses[requirements.Core.courses[course]].name;
-		coreHTML += requirements.Core.courses[course] + " " + currentCourseName + "<br>";
 	}
 	$(".core").html(coreHTML + "</p>");
 	
 	// Load Track (Elective) Classes
 	let trackHTML = "<p>";
-	for(let course in requirements.Electives.courses) {
-		if(isCourseOnPlan(requirements.Electives.courses[course])) {
-			trackHTML += "<img src='./images/checkmark.png' width=10 height=10> ";
-		} else {
-			trackHTML += "<img src='./images/x-mark.png' width=10 height=10> ";
+	if (requirements.Electives !== undefined) {
+		for(let course in requirements.Electives.courses) {
+			if(isCourseOnPlan(requirements.Electives.courses[course])) {
+				trackHTML += "<img src='./images/checkmark.png' width=10 height=10> ";
+			} else {
+				trackHTML += "<img src='./images/x-mark.png' width=10 height=10> ";
+			}
+			currentCourseName = currentCatalog.courses[requirements.Electives.courses[course]].name;
+			trackHTML += requirements.Electives.courses[course] + " " + currentCourseName + "<br>";
 		}
-		currentCourseName = currentCatalog.courses[requirements.Electives.courses[course]].name;
-		trackHTML += requirements.Electives.courses[course] + " " + currentCourseName + "<br>";
 	}
 	$(".track").html(trackHTML + "</p>");
 	
 	// Load Cognates
 	let cognatesHTML = "<p>";
-	for(let course in requirements.Cognates.courses) {
-		if(isCourseOnPlan(requirements.Cognates.courses[course])) {
-			cognatesHTML += "<img src='./images/checkmark.png' width=10 height=10> ";
-		} else {
-			cognatesHTML += "<img src='./images/x-mark.png' width=10 height=10> ";
+	if (requirements.Cognates !== undefined) {
+		for(let course in requirements.Cognates.courses) {
+			if(isCourseOnPlan(requirements.Cognates.courses[course])) {
+				cognatesHTML += "<img src='./images/checkmark.png' width=10 height=10> ";
+			} else {
+				cognatesHTML += "<img src='./images/x-mark.png' width=10 height=10> ";
+			}
+			currentCourseName = currentCatalog.courses[requirements.Cognates.courses[course]].name;
+			cognatesHTML += requirements.Cognates.courses[course] + " " + currentCourseName + "<br>";
 		}
-		currentCourseName = currentCatalog.courses[requirements.Cognates.courses[course]].name;
-		cognatesHTML += requirements.Cognates.courses[course] + " " + currentCourseName + "<br>";
 	}
 	$(".cognates").html(cognatesHTML + "</p>");
 	
 	// Load Gen Eds
 	let genEdsHTML = "<p>";
-	for(let course in requirements.GenEds.courses) {
-		if(isCourseOnPlan(requirements.GenEds.courses[course])) {
-			genEdsHTML += "<img src='./images/checkmark.png' width=10 height=10> ";
-		} else {
-			genEdsHTML += "<img src='./images/x-mark.png' width=10 height=10> ";
+	if (requirements.GenEds !== undefined) {
+		for(let course in requirements.GenEds.courses) {
+			if(isCourseOnPlan(requirements.GenEds.courses[course])) {
+				genEdsHTML += "<img src='./images/checkmark.png' width=10 height=10> ";
+			} else {
+				genEdsHTML += "<img src='./images/x-mark.png' width=10 height=10> ";
+			}
+			currentCourseName = currentCatalog.courses[requirements.GenEds.courses[course]].name;
+			genEdsHTML += requirements.GenEds.courses[course] + " " + currentCourseName + "<br>";
 		}
-		currentCourseName = currentCatalog.courses[requirements.GenEds.courses[course]].name;
-		genEdsHTML += requirements.GenEds.courses[course] + " " + currentCourseName + "<br>";
 	}
 	$(".geneds").html(genEdsHTML + "</p>");
 }
@@ -687,7 +711,7 @@ function init(){
 			xhrReq = new XMLHttpRequest();
 			xhrReq.addEventListener("load", loadRequirements);
 			xhrReq.responseType = "json";
-			xhrReq.open("GET", "http://judah.cedarville.edu/~knoerr/cs3220/termProject/getRequirements.php");
+			xhrReq.open("GET", "./php/project4_getRequirements.php");
 			xhrReq.send();
 		}
 	}

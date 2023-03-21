@@ -42,7 +42,7 @@ if ($stmt = $con->prepare('SELECT iaj_user.name, iaj_plan.plan_id, iaj_plan.plan
 	if ($stmt->num_rows > 0) {
 		$stmt->bind_result($userName, $planID, $planName, $planCatalog, $planDefault);
 		while ($row = $stmt->fetch()) {
-			$plans[$planID] = array("name"=>$planName,"student"=>$userName,"catalog"=>$planCatalog,"default"=>$planDefault,"courses"=>array(),"major"=>"TEMP_MAJOR","currYear"=>(int)date("Y"),"currTerm"=>getCurrentTerm());
+			$plans[$planID] = array("name"=>$planName,"student"=>$userName,"catalog"=>$planCatalog,"default"=>$planDefault,"courses"=>array(),"majors"=>array(),"currYear"=>(int)date("Y"),"currTerm"=>getCurrentTerm());
 			
 			if ($courseStmt = $con->prepare('SELECT course_id, year, term FROM iaj_plan_courses WHERE plan_id = ?')) {
 				$courseStmt->bind_param('s', $planID);
@@ -51,6 +51,19 @@ if ($stmt = $con->prepare('SELECT iaj_user.name, iaj_plan.plan_id, iaj_plan.plan
 				$courseStmt->bind_result($courseID, $courseYear, $courseTerm);
 				while ($courseRow = $courseStmt->fetch()) {
 					$plans[$planID]["courses"][$courseID] = array("id"=>$courseID,"year"=>$courseYear,"term"=>$courseTerm);
+				}
+			}
+			
+			if ($subjectStmt = $con->prepare('SELECT subject FROM iaj_plan_subjects WHERE plan_id = ? AND type = ?')) {
+				$typeRequest = "Major";
+				$subjectStmt->bind_param('ss', $planID, $typeRequest);
+				$subjectStmt->execute();
+				$subjectStmt->store_result();
+				$subjectStmt->bind_result($planSubject);
+				$tempVar = 0;
+				while ($courseRow = $subjectStmt->fetch()) {
+					$plans[$planID]["majors"][$tempVar] = $planSubject;
+					$tempVar++;
 				}
 			}
 		}
