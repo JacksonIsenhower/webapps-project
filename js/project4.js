@@ -12,6 +12,10 @@
  *	jquery.ui.widget.js
  */
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function Plan(name, year, major, studentName, currentSemester, courses = []) {
 	this.name = name;
 	this.year = year;
@@ -144,23 +148,38 @@ function generateScheduleHeader(plan) {
 function externalPlanHandler() {
 	if (this.status === 200) {
 		let returnPlan = new Plan("John Smith's Plan", 0, "", "John Smith", "");
-		let externalPlan = this.response.plan;
-		currentCatalog = this.response.catalog;
+		let externalPlans = this.response.plans;
+		let externalCatalogs = this.response.catalogs;
+		let externalPlan;
+		let currentYear;
+		for (let planKey in externalPlans) {
+			if (externalPlans[planKey].default === "true") {
+				externalPlan = externalPlans[planKey];
+			}
+		}
+		for (let catalogKey in externalCatalogs) {
+			if (externalCatalogs[catalogKey].year == externalPlan.catalog) {
+				currentCatalog = externalCatalogs[catalogKey];
+			}
+		}
 		returnPlan.name = externalPlan.name;
-		returnPlan.year = externalPlan.catYear;
+		returnPlan.year = externalPlan.currentYear;
 		returnPlan.major = externalPlan.major;
 		returnPlan.currentSemester = "" + externalPlan.currTerm + " " + externalPlan.currYear;
 		returnPlan.studentName = externalPlan.student;
 		let currentCourse;
 		for (let courseKey in externalPlan.courses) {
 			currentCourse = externalPlan.courses[courseKey];
-			returnPlan.courses.push(new Course(
-				currentCourse.id,
-				currentCatalog.courses[courseKey].name,
-				currentCatalog.courses[courseKey].credits,
-				currentCourse.term,
-				currentCourse.year)
-			);
+			if (courseKey != "") {
+				returnPlan.courses.push(new Course(
+					currentCourse.id,
+					currentCatalog.courses[courseKey].name,
+					currentCatalog.courses[courseKey].credits,
+					capitalizeFirstLetter(currentCourse.term),
+					currentCourse.year)
+				);
+				
+			}
 		}
 		currentPlan = returnPlan;
 		pageScheduleContainer.innerHTML = generateScheduleHTML(currentPlan);
@@ -662,7 +681,7 @@ function init(){
 	
 	xhr.addEventListener("load", externalPlanHandler);
 	xhr.responseType = "json";
-	xhr.open("GET", "http://judah.cedarville.edu/~knoerr/cs3220/termProject/getCombined.php");
+	xhr.open("GET", "./php/project4_getCombined.php");
 	xhr.onreadystatechange = function() {
 		if(xhrReq == undefined) {
 			xhrReq = new XMLHttpRequest();
