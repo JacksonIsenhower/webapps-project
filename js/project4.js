@@ -244,9 +244,7 @@ function loadRequirements() {
 		}
 	}
 	
-	console.log(focusSubject);
 	let requirements = focusSubject.categories;
-	console.log(requirements);
 	let currentCourseName = "";
 	
 	// Load Core Classes
