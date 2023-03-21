@@ -1,11 +1,17 @@
 <?php
 session_start();
 
-// This will need to be changed
-$DATABASE_HOST = 'localhost';
-$DATABASE_USER = 'root';
-$DATABASE_PASS = '';
-$DATABASE_NAME = 'phplogin';
+function badCredentials() {
+	echo "<script language=\"JavaScript\">\n";
+	echo "alert('Username or Password was incorrect!');\n";
+	echo "window.location='../project4_login.html'";
+	echo "</script>";
+}
+
+$DATABASE_HOST = 'james.cedarville.edu';
+$DATABASE_USER = 'cs3220_sp23';
+$DATABASE_PASS = 'E57y6Z1FwAlraEmA';
+$DATABASE_NAME = 'cs3220_sp23';
 
 $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 if ( mysqli_connect_errno() ) {
@@ -18,7 +24,7 @@ if ( !isset($_POST['username'], $_POST['password']) ) {
 }
 
 // Hit the user/password database. Parameter binding is used to deny SQL Injections
-if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?')) {
+if ($stmt = $con->prepare('SELECT id, password FROM iaj_user WHERE name = ?')) {
 	$stmt->bind_param('s', $_POST['username']);
 	$stmt->execute();
 	$stmt->store_result();
@@ -29,22 +35,21 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?'
 		$stmt->fetch();
 		
 		// Verify password and (if it's correct) set up the login session. 
-		// WARNING: the password field needs to be a HASH of the password, not the password itself!
 		if (password_verify($_POST['password'], $password)) {
 			session_regenerate_id();
 			$_SESSION['loggedin'] = TRUE;
 			$_SESSION['name'] = $_POST['username'];
 			$_SESSION['id'] = $id;
-			header("location: project4.php");
+			header("location: ../project4.html");
 			
 		// Incorrect password
 		} else {
-			echo 'Incorrect username and/or password!';
+			badCredentials();
 		}
 		
 	// Incorrect username
 	} else {
-		echo 'Incorrect username and/or password!';
+		badCredentials();
 	}
 
 	$stmt->close();
