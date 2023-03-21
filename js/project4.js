@@ -228,7 +228,6 @@ function isCourseOnPlan(id) {
 
 function loadRequirements() {
 	let catalogs = this.response;
-	console.log(catalogs);
 	let catalog;
 	for (let catalogKey in catalogs) {
 		currentCatalogThing = catalogs[catalogKey];
@@ -238,12 +237,10 @@ function loadRequirements() {
 	}
 	let subjects = catalog.subjects;
 	let focusSubject;
-	console.log(currentPlan.major);
 	for (let subjectKey in subjects) {
 		currentSubject = subjects[subjectKey];
 		if (subjectKey == currentPlan.major) {
 			focusSubject = currentSubject;
-			console.log(focusSubject);
 		}
 	}
 	
