@@ -41,6 +41,8 @@
 		} else {
 			header("Location: ../login.php");
 			die();
+			//$_SESSION["name"] = "Temp Name";
+			//$_SESSION["id"] = "12345";
 		}
 		?>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -72,14 +74,59 @@
 							<input type="range" min="1" max="100" value="50" class="slider" id="rainbowSpeed" name="rainbowSpeed">
 							<label for="rainbowSpeed">Speed</label>
 						</span>
-						<span class="header-column">
-							<span id="major"><strong>Major: </strong><var>TempMajor</var></span><br>
-							<span id="minor"><strong>Minor: </strong><var>TempMinor</var></span>
-						</span>
-						<span class="header-column">
-							<span id="student"><strong>Student: </strong><var>TempName</var></span><br>
-							<span id="catalog"><strong>Catalog: </strong><var>TempYear</var></span>
-						</span>
+						<?php
+							$DATABASE_HOST = 'james.cedarville.edu';
+							$DATABASE_USER = 'cs3220_sp23';
+							$DATABASE_PASS = 'E57y6Z1FwAlraEmA';
+							$DATABASE_NAME = 'cs3220_sp23';
+
+							$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+							if ( mysqli_connect_errno() ) {
+								exit('Failed to connect to MySQL: ' . mysqli_connect_error());
+							}
+							$studentName = $_SESSION["name"];
+							$studentID = $_SESSION['id'];
+							$studentMajor = "Temp Major";
+							$studentMinor = "Temp Minor";
+							$catalogYear;
+							$typeRequest = "Major";
+							if ($stmt = $con->prepare("SELECT catalog, subject FROM iaj_user, iaj_plan, iaj_plan_subjects WHERE iaj_user.ID = ? AND iaj_user.ID = iaj_plan.user_id AND iaj_plan.plan_id = iaj_plan_subjects.plan_id AND iaj_plan_subjects.type = ? AND iaj_plan.default_plan = 'true'")) {
+								$stmt->bind_param('ss', $studentID, $typeRequest);
+								$stmt->execute();
+								$stmt->store_result();
+
+								// The PHP grabs the first default plan
+								if ($stmt->num_rows > 0) {
+									$stmt->bind_result($year, $major);
+									$stmt->fetch();
+									$studentMajor = $major;
+									$catalogYear = $year;
+								}
+							}
+							$typeRequest = "Minor";
+							if ($stmt = $con->prepare("SELECT subject FROM iaj_user, iaj_plan, iaj_plan_subjects WHERE iaj_user.ID = ? AND iaj_user.ID = iaj_plan.user_id AND iaj_plan.plan_id = iaj_plan_subjects.plan_id AND iaj_plan_subjects.type = ? AND iaj_plan.default_plan = 'true'")) {
+								$stmt->bind_param('ss', $studentID, $typeRequest);
+								$stmt->execute();
+								$stmt->store_result();
+
+								// The PHP grabs the first default plan
+								if ($stmt->num_rows > 0) {
+									$stmt->bind_result($minor);
+									$stmt->fetch();
+									$studentMinor = $minor;
+								}
+							}
+							echo "
+								<span class='header-column'>
+									<span id='major'><strong>Major: </strong><var>$studentMajor</var></span><br>
+									<span id='minor'><strong>Minor: </strong><var>$studentMinor</var></span>
+								</span>
+								<span class='header-column'>
+									<span id='student'><strong>Student: </strong><var>$studentName</var></span><br>
+									<span id='catalog'><strong>Catalog: </strong><var>$catalogYear</var></span>
+								</span>
+							"
+						?>
 					</div>
 				</div>
 			</header>
