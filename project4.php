@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<?php   // session2.php
-		session_start();
+		/*<?php   // session2.php
+		/*session_start();
 		if (isset($_SESSION["loggedin"])) {
 		} else {
 			header("Location: ../php/project4_loginpage.php");
 			die();
 			//$_SESSION["name"] = "Temp Name";
 			//$_SESSION["id"] = "12345";
-		}
+		}*/
 		?>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -55,9 +55,32 @@
 							$studentMajor = "Temp Major";
 							$studentMinor = "Temp Minor";
 							$catalogYear;
+							$typeRequest = "Plans";
+							$studentPlan = $_POST['planselect'];
+							
+							/*
+							if ($stmt = $con->prepare("SELECT catalog, subject FROM iaj_user, ?, iaj_plan_subjects WHERE iaj_user.ID = ? AND iaj_user.ID = iaj_plan.user_id AND iaj_plan.plan_id = iaj_plan_subjects.plan_id AND iaj_plan_subjects.type = ? AND iaj_plan.default_plan = 'true'")) {
+							*/
+							
+							if ($stmt = $con->prepare("SELECT plan_name from iaj_plan WHERE user_id=?"){
+													
+								$stmt->bind_param('s', $studentID,);
+								$stmt->execute();
+								$stmt->store_result();
+
+								// The PHP grabs the first default plan
+								if ($stmt->num_rows > 0) {
+									$stmt->bind_result($plan_name);
+									$stmt->fetch();
+									$Plans = $plan_name;
+								}
+							}
+
+							
+							
 							$typeRequest = "Major";
-							if ($stmt = $con->prepare("SELECT catalog, subject FROM iaj_user, iaj_plan, iaj_plan_subjects WHERE iaj_user.ID = ? AND iaj_user.ID = iaj_plan.user_id AND iaj_plan.plan_id = iaj_plan_subjects.plan_id AND iaj_plan_subjects.type = ? AND iaj_plan.default_plan = 'true'")) {
-								$stmt->bind_param('ss', $studentID, $typeRequest);
+							if ($stmt = $con->prepare("SELECT subject from iaj_plan_subjects WHERE plan_id=? and type='Major'"){
+								$stmt->bind_param('s', $studentPlan,);
 								$stmt->execute();
 								$stmt->store_result();
 
@@ -66,12 +89,11 @@
 									$stmt->bind_result($year, $major);
 									$stmt->fetch();
 									$studentMajor = $major;
-									$catalogYear = $year;
 								}
 							}
 							$typeRequest = "Minor";
-							if ($stmt = $con->prepare("SELECT subject FROM iaj_user, iaj_plan, iaj_plan_subjects WHERE iaj_user.ID = ? AND iaj_user.ID = iaj_plan.user_id AND iaj_plan.plan_id = iaj_plan_subjects.plan_id AND iaj_plan_subjects.type = ? AND iaj_plan.default_plan = 'true'")) {
-								$stmt->bind_param('ss', $studentID, $typeRequest);
+							if ($stmt = $con->prepare("SELECT subject from iaj_plan_subjects WHERE plan_id=? and type='Minor'"){
+								$stmt->bind_param('s', $studentPlan,);
 								$stmt->execute();
 								$stmt->store_result();
 
@@ -80,6 +102,19 @@
 									$stmt->bind_result($minor);
 									$stmt->fetch();
 									$studentMinor = $minor;
+								}
+							}
+							$typeRequest = "Year";
+							if ($stmt = $con->prepare("SELECT year from iaj_plan_courses WHERE plan_id=?"){
+								$stmt->bind_param('s', $studentPlan,);
+								$stmt->execute();
+								$stmt->store_result();
+
+								// The PHP grabs the first default plan
+								if ($stmt->num_rows > 0) {
+									$stmt->bind_result($year);
+									$stmt->fetch();
+									$catalogYear = $year;
 								}
 							}
 							echo "
@@ -125,7 +160,19 @@
 				</div>
 				<div class="grid-item" id="ur-container">
 					<div class="section-header" id="schedule-header">
-						<h2>Academic Plan: plan</h2>
+						<h2>Academic Plan:
+						<?php
+							echo "
+							<FORM method='post' action='project4.php'>
+							<label for='planselect'>Plan</label>
+							<select name='planselect' id='planselect' class='planselect' >
+							</FORM>
+							"
+							foreach ($Plans as $plan)
+								echo"<option value='$plan'>Select</option>"
+							echo "</select>"
+							?>
+						</h2>
 					</div>
 					<div class="schedule-container">
 						No years loaded.
