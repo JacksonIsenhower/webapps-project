@@ -14,10 +14,10 @@ function getCurrentTerm() {
 
 session_start();
 
-$DATABASE_HOST = 'james.cedarville.edu';
-$DATABASE_USER = 'cs3220_sp23';
-$DATABASE_PASS = 'E57y6Z1FwAlraEmA';
-$DATABASE_NAME = 'cs3220_sp23';
+$DATABASE_HOST = 'localhost';
+$DATABASE_USER = 'root';
+$DATABASE_PASS = '';
+$DATABASE_NAME = 'test';
 
 if (!isset($_SESSION['id'])) {
 	exit('No user provided');
@@ -48,8 +48,8 @@ if ($stmt = $con->prepare('SELECT iaj_user.name, iaj_plan.plan_id, iaj_plan.plan
 				$courseStmt->bind_param('s', $planID);
 				$courseStmt->execute();
 				$courseStmt->store_result();
+				$courseStmt->bind_result($courseID, $courseYear, $courseTerm);
 				while ($courseRow = $courseStmt->fetch()) {
-					$courseStmt->bind_result($courseID, $courseYear, $courseTerm);
 					$plans[$planID]["courses"][$courseID] = array("id"=>$courseID,"year"=>$courseYear,"term"=>$courseTerm);
 				}
 			}
@@ -72,8 +72,8 @@ if ($stmt = $con->prepare('SELECT iaj_catalog.year FROM iaj_catalog')) {
 				$courseStmt->bind_param('s', $catalog);
 				$courseStmt->execute();
 				$courseStmt->store_result();
+				$courseStmt->bind_result($courseID, $courseName, $courseDescription, $courseCredits);
 				while ($courseRow = $courseStmt->fetch()) {
-					$courseStmt->bind_result($courseID, $courseName, $courseDescription, $courseCredits);
 					if ($courseID != null) {
 						$catalogs[$catalog]["courses"][$courseID] = array("id"=>$courseID,"name"=>$courseName,"description"=>$courseDescription,"credits"=>$courseCredits);
 					}
