@@ -61,7 +61,9 @@ if ($stmt = $con->prepare('SELECT iaj_catalog.year FROM iaj_catalog')) {
 				$courseStmt->store_result();
 				while ($courseRow = $courseStmt->fetch()) {
 					$courseStmt->bind_result($courseID, $courseName, $courseDescription, $courseCredits);
-					$catalogs[$catalog]["courses"][$courseID] = array("id"=>$courseID,"name"=>$courseName,"description"=>$courseDescription,"credits"=>$courseCredits);
+					if ($courseID != null) {
+						$catalogs[$catalog]["courses"][$courseID] = array("id"=>$courseID,"name"=>$courseName,"description"=>$courseDescription,"credits"=>$courseCredits);
+					}
 				}
 			}
 		}
