@@ -18,7 +18,7 @@ session_start();
 		</header>
 		<div class="login">
 			<h1>Login to APE</h1>
-			<form action="php/project4_auth.php" method="post">
+			<form action="project4_auth.php" method="post">
 				<label for="username">
 					<i class="userField"></i>
 				</label>
