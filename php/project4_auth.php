@@ -4,7 +4,7 @@ session_start();
 function badCredentials() {
 	echo "<script language=\"JavaScript\">\n";
 	echo "alert('Username or Password was incorrect!');\n";
-	echo "window.location='../project4_login.html'";
+	echo "window.location='project4_loginpage.php'";
 	echo "</script>";
 }
 
