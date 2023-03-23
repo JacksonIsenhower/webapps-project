@@ -20,8 +20,8 @@ $DATABASE_PASS = '';
 $DATABASE_NAME = 'test';
 
 if (!isset($_SESSION['id'])) {
-	exit('No user provided');
-	//$_SESSION['id'] = '12345';
+	//exit('No user provided');
+	$_SESSION['id'] = '12345';
 }
 
 $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
@@ -62,7 +62,7 @@ if ($stmt = $con->prepare('SELECT iaj_user.name, iaj_plan.plan_id, iaj_plan.plan
 	if ($stmt->num_rows > 0) {
 		$stmt->bind_result($userName, $planID, $planName, $planCatalog);
 		$row = $stmt->fetch();
-		$plan = array("name"=>$planName,"planID"=>$planID,"student"=>$userName,"catalog"=>$planCatalog,"courses"=>array(),"majors"=>array(),"currYear"=>(int)date("Y"),"currTerm"=>getCurrentTerm());
+		$plan = array("name"=>$planName,"planID"=>$planID,"student"=>$userName,"catalog"=>$planCatalog,"courses"=>array(),"major"=>"","majors"=>array(),"currYear"=>(int)date("Y"),"currTerm"=>getCurrentTerm());
 
 		if ($courseStmt = $con->prepare('SELECT course_id, year, term FROM iaj_plan_courses WHERE plan_id = ?')) {
 			$courseStmt->bind_param('s', $_SESSION['plan']);
@@ -82,6 +82,10 @@ if ($stmt = $con->prepare('SELECT iaj_user.name, iaj_plan.plan_id, iaj_plan.plan
 			$majorStmt->bind_result($subject);
 			$tempVar = 0;
 			while ($majorRow = $majorStmt->fetch()) {
+				if ($tempVar > 0) {
+					$plan["major"] = $plan["major"] . ", ";
+				}
+				$plan["major"] = $plan["major"] . $subject;
 				$plan["majors"][$tempVar] = $subject;
 				$tempVar++;
 			}

@@ -160,6 +160,7 @@ function externalPlanHandler() {
 		for (let courseKey in externalPlan.courses) {
 			currentCourse = externalPlan.courses[courseKey];
 			if (courseKey != "") {
+				console.log(currentCatalog);
 				returnPlan.courses.push(new Course(
 					currentCourse.id,
 					currentCatalog.courses[courseKey].name,
@@ -216,13 +217,29 @@ function isCourseOnPlan(id) {
 }
 
 function loadRequirements() {
-	let requirements = this.response.categories;
-	console.log(requirements);
+	let catalogs = this.response;
+	let catalog;
+	for (let catalogKey in catalogs) {
+		currentCatalogThing = catalogs[catalogKey];
+		if (catalogKey == currentPlan.year) {
+			catalog = currentCatalogThing;
+		}
+	}
+	let subjects = catalog.subjects;
+	let focusSubject;
+	for (let subjectKey in subjects) {
+		currentSubject = subjects[subjectKey];
+		if (subjectKey == currentPlan.major) {
+			focusSubject = currentSubject;
+		}
+	}
+	
+	let requirements = focusSubject.categories;
+	//console.log(requirements);
 	let currentCourseName = "";
 	
 	// Load Core Classes
 	let coreHTML = "<p>";
-	console.log(currentCatalog);
 	if (requirements.Core !== undefined) {
 		for(let course in requirements.Core.courses) {
 			if(isCourseOnPlan(requirements.Core.courses[course])) {
@@ -685,7 +702,7 @@ function init(){
 			xhrReq = new XMLHttpRequest();
 			xhrReq.addEventListener("load", loadRequirements);
 			xhrReq.responseType = "json";
-			xhrReq.open("GET", "./php/project4_getRequirements.php");
+			xhrReq.open("GET", "http://judah.cedarville.edu/~knoerr/cs3220/termProject/getRequirements.php");
 			xhrReq.send();
 		}
 	}

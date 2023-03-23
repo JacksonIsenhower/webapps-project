@@ -20,8 +20,8 @@ $DATABASE_PASS = '';
 $DATABASE_NAME = 'test';
 
 if (!isset($_SESSION['id'])) {
-	exit('No user provided');
-	//$_SESSION['id'] = '12345';
+	//exit('No user provided');
+	$_SESSION['id'] = '12345';
 }
 
 $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
