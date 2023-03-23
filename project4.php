@@ -4,7 +4,7 @@
 		<?php   // session2.php
 		session_start();
 		if (isset($_SESSION["loggedin"])) {
-			if ($stmt = $con->prepare('SELECT "subject" FROM iaj_plan_subjects WHERE plan_id = (select plan_id from iaj_plan where user_id=(select ID from iaj_user where name = ?)) and type = Major')) {
+			/*if ($stmt = $con->prepare('SELECT "subject" FROM iaj_plan_subjects WHERE plan_id = (select plan_id from iaj_plan where user_id=(select ID from iaj_user where name = ?)) and type = Major')) {
 				$stmt->bind_param('s', $_POST['username']);
 				$stmt->execute();
 				$stmt->store_result();
@@ -37,12 +37,12 @@
 					$stmt->fetch();
 					var TempYear = $year
 				}}
-				var TempName = $_SESSION["username"]
+				var TempName = $_SESSION["username"]*/
 		} else {
-			header("Location: ../login.php");
-			die();
-			//$_SESSION["name"] = "Temp Name";
-			//$_SESSION["id"] = "12345";
+			//header("Location: ../project4_login.php");
+			//die();
+			$_SESSION["name"] = "Temp Name";
+			$_SESSION["id"] = "12345";
 		}
 		?>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -75,10 +75,10 @@
 							<label for="rainbowSpeed">Speed</label>
 						</span>
 						<?php
-							$DATABASE_HOST = 'james.cedarville.edu';
-							$DATABASE_USER = 'cs3220_sp23';
-							$DATABASE_PASS = 'E57y6Z1FwAlraEmA';
-							$DATABASE_NAME = 'cs3220_sp23';
+							$DATABASE_HOST = 'localhost';
+							$DATABASE_USER = 'root';
+							$DATABASE_PASS = '';
+							$DATABASE_NAME = 'test';
 
 							$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 							if ( mysqli_connect_errno() ) {

@@ -54,4 +54,24 @@ if ($stmt = $con->prepare('SELECT id, password FROM iaj_user WHERE name = ?')) {
 
 	$stmt->close();
 }
+
+// Select a default plan to specify as selected upon the start of the session
+if (!isset($_SESSION['plan']) && $stmt = $con->prepare("SELECT plan_id FROM iaj_plan WHERE user_id = ? AND default_plan = 'true'")) {
+	$stmt->bind_param('s', $_SESSION['id']);
+	$stmt->execute();
+	$stmt->store_result();
+
+	// If there is a default plan, the SQL statement will return at least one row
+	if ($stmt->num_rows > 0) {
+		$stmt->bind_result($planID);
+		$stmt->fetch();
+		
+		$_SESSION['plan'] = $planID;
+	}
+	else {
+		$_SESSION['plan'] = null;
+	}
+
+	$stmt->close();
+}
 ?>
