@@ -148,7 +148,7 @@ function generateScheduleHeader(plan) {
 function externalPlanHandler() {
 	if (this.status === 200) {
 		let returnPlan = new Plan("John Smith's Plan", 0, "", "John Smith", "");
-		let externalPlan = this.response.plan;
+		let externalPlan = new Plan(this.response.plan);
 		currentCatalog = this.response.catalog;
 		let currentYear;
 		returnPlan.name = externalPlan.name;
@@ -216,13 +216,14 @@ function isCourseOnPlan(id) {
 }
 
 function loadRequirements() {
-	let requirements = this.response.categories;
-	console.log(requirements);
+	parser = new DOMParser();
+	let requirements = parser.parseFromString(this,"text/xml");
+	//console.log("LoadRequirements:"+requirements);
 	let currentCourseName = "";
 	
 	// Load Core Classes
 	let coreHTML = "<p>";
-	console.log(currentCatalog);
+	//console.log(currentCatalog);
 	if (requirements.Core !== undefined) {
 		for(let course in requirements.Core.courses) {
 			if(isCourseOnPlan(requirements.Core.courses[course])) {
