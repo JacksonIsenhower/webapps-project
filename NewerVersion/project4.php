@@ -1,52 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<?php   // session2.php
-		session_start();
+		/*<?php   // session2.php
+		/*session_start();
 		if (isset($_SESSION["loggedin"])) {
-			/*if ($stmt = $con->prepare('SELECT "subject" FROM iaj_plan_subjects WHERE plan_id = (select plan_id from iaj_plan where user_id=(select ID from iaj_user where name = ?)) and type = Major')) {
-				$stmt->bind_param('s', $_POST['username']);
-				$stmt->execute();
-				$stmt->store_result();
-			
-				// If there is a username matching, the SQL statement will return at least one row
-				if ($stmt->num_rows > 0) {
-					$stmt->bind_result($id, $password);
-					$stmt->fetch();
-					var TempMajor = $subject
-				}}
-			if ($stmt = $con->prepare('SELECT "subject" FROM iaj_plan_subjects WHERE plan_id = (select plan_id from iaj_plan where user_id=(select ID from iaj_user where name = ?)) and type = Minor')) {
-				$stmt->bind_param('s', $_POST['username']);
-				$stmt->execute();
-				$stmt->store_result();
-			
-				// If there is a username matching, the SQL statement will return at least one row
-				if ($stmt->num_rows > 0) {
-					$stmt->bind_result($id, $password);
-					$stmt->fetch();
-					var TempMinor = $subject
-				}}
-			if ($stmt = $con->prepare('SELECT "year" FROM iaj_plan_courses WHERE plan_id = (select plan_id from iaj_plan where user_id=(select ID from iaj_user where name = ?)) and type = Minor')) {
-				$stmt->bind_param('s', $_POST['username']);
-				$stmt->execute();
-				$stmt->store_result();
-			
-				// If there is a username matching, the SQL statement will return at least one row
-				if ($stmt->num_rows > 0) {
-					$stmt->bind_result($id, $password);
-					$stmt->fetch();
-					var TempYear = $year
-				}}
-				var TempName = $_SESSION["username"]*/
 		} else {
-			header("Location: ./project4_login.php");
+			header("Location: ../project4_loginpage.php");
 			die();
-		}
+			//$_SESSION["name"] = "Temp Name";
+			//$_SESSION["id"] = "12345";
+		}*/
 		?>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 		<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-		<script src="./js/project4.js"></script>
 		<title>Academic Planning Environment</title>
 		<link rel="stylesheet" href="./css/project4.css">
 		<link rel="shortcut icon" href="https://ape.cedarville.edu/img/favicon.ico">
@@ -87,24 +54,45 @@
 							$studentMajor = "Temp Major";
 							$studentMinor = "Temp Minor";
 							$catalogYear;
+							$typeRequest = "Plans";
 							$studentPlan = $_POST['planselect'];
-							$typeRequest = "Major";
-							if ($stmt = $con->prepare("SELECT catalog, subject FROM iaj_user, iaj_plan, iaj_plan_subjects WHERE iaj_user.ID = ? AND iaj_user.ID = iaj_plan.user_id AND iaj_plan.plan_id = iaj_plan_subjects.plan_id AND iaj_plan_subjects.type = ? AND iaj_plan.default_plan = 'true'")) {
-								$stmt->bind_param('ss', $studentID, $typeRequest);
+							
+							/*
+							if ($stmt = $con->prepare("SELECT catalog, subject FROM iaj_user, ?, iaj_plan_subjects WHERE iaj_user.ID = ? AND iaj_user.ID = iaj_plan.user_id AND iaj_plan.plan_id = iaj_plan_subjects.plan_id AND iaj_plan_subjects.type = ? AND iaj_plan.default_plan = 'true'")) {
+							*/
+							
+							if ($stmt = $con->prepare("SELECT plan_name from iaj_plan WHERE user_id=?"){
+													
+								$stmt->bind_param('s', $studentID,);
 								$stmt->execute();
 								$stmt->store_result();
 
 								// The PHP grabs the first default plan
 								if ($stmt->num_rows > 0) {
-									$stmt->bind_result($year, $major);
+									$stmt->bind_result($plan_name);
+									$stmt->fetch();
+									$Plans = $plan_name;
+								}
+							}
+
+							
+							
+							$typeRequest = "Major";
+							if ($stmt = $con->prepare("SELECT subject from iaj_plan_subjects WHERE plan_id=? and type='Major'"){
+								$stmt->bind_param('s', $studentPlan,);
+								$stmt->execute();
+								$stmt->store_result();
+
+								// The PHP grabs the first default plan
+								if ($stmt->num_rows > 0) {
+									$stmt->bind_result($major);
 									$stmt->fetch();
 									$studentMajor = $major;
-									$catalogYear = $year;
 								}
 							}
 							$typeRequest = "Minor";
-							if ($stmt = $con->prepare("SELECT subject FROM iaj_user, iaj_plan, iaj_plan_subjects WHERE iaj_user.ID = ? AND iaj_user.ID = iaj_plan.user_id AND iaj_plan.plan_id = iaj_plan_subjects.plan_id AND iaj_plan_subjects.type = ? AND iaj_plan.default_plan = 'true'")) {
-								$stmt->bind_param('ss', $studentID, $typeRequest);
+							if ($stmt = $con->prepare("SELECT subject from iaj_plan_subjects WHERE plan_id=? and type='Minor'"){
+								$stmt->bind_param('s', $studentPlan,);
 								$stmt->execute();
 								$stmt->store_result();
 
@@ -115,17 +103,17 @@
 									$studentMinor = $minor;
 								}
 							}
-							if ($stmt = $con->prepare("SELECT plan_name FROM iaj_plan WHERE iaj_plan.user_id = ?")) {
-								$stmt->bind_param('s', $studentID);
+							$typeRequest = "Year";
+							if ($stmt = $con->prepare("SELECT year from iaj_plan_courses WHERE plan_id=?"){
+								$stmt->bind_param('s', $studentPlan,);
 								$stmt->execute();
 								$stmt->store_result();
 
 								// The PHP grabs the first default plan
 								if ($stmt->num_rows > 0) {
-									$stmt->bind_result($Plans);
+									$stmt->bind_result($year);
 									$stmt->fetch();
-									//$Plans = $P;
-									//console.log($Plans);
+									$catalogYear = $year;
 								}
 							}
 							echo "
@@ -171,13 +159,7 @@
 				</div>
 				<div class="grid-item" id="ur-container">
 					<div class="section-header" id="schedule-header">
-						<h2>Academic Plan: My Plan</h2>
-					</div>
-					<div class="schedule-container">
-						No years loaded.
-					</div>
-					<div class="schedule-ui">
-						<button>Open Notes</button><button>Delete Year</button><button>Add Year</button>
+						<h2>Academic Plan:
 						<?php
 							echo "
 							<FORM method='post' action='project4.php'>
@@ -185,10 +167,17 @@
 							<select name='planselect' id='planselect' class='planselect' >
 							</FORM>
 							"
-							/*foreach ($Plans as $plan)
+							foreach ($Plans as $plan)
 								echo"<option value='$plan'>Select</option>"
-							echo "</select>"*/
+							echo "</select>"
 							?>
+						</h2>
+					</div>
+					<div class="schedule-container">
+						No years loaded.
+					</div>
+					<div class="schedule-ui">
+						<button>Open Notes</button><button>Delete Year</button><button>Add Year</button>
 					</div>
 				</div>
 				<div class="grid-item" id="ll-container">
@@ -213,7 +202,7 @@
 							<li><a href="../cs3220.html">Jackson Isenhower</a></li>
 						</ul>
 					</div>
-				</div
+				</div>
 				<div class="grid-item" id="lr-container">
 					<p id="showing" class="right-float">
 						Loading...
