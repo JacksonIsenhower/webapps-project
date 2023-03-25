@@ -1,12 +1,7 @@
-<?php
-session_start();
-
-?>
-<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>Login to APE</title>
-		<link rel="stylesheet" href="../css/project4_login.css">
+		<link rel="stylesheet" href="./css/project4_login.css">
 		<meta charset="utf-8">
 	</head>
 	<body>
@@ -18,7 +13,7 @@ session_start();
 		</header>
 		<div class="login">
 			<h1>Login to APE</h1>
-			<form action="project4_auth.php" method="post">
+			<form action="php/project4_auth.php" method="post">
 				<label for="username">
 					<i class="userField"></i>
 				</label>

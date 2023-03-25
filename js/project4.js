@@ -148,7 +148,8 @@ function generateScheduleHeader(plan) {
 function externalPlanHandler() {
 	if (this.status === 200) {
 		let returnPlan = new Plan("John Smith's Plan", 0, "", "John Smith", "");
-		let externalPlan = new Plan(this.response.plan);
+		let externalPlan = this.response.plan;
+		//console.log(externalPlan);
 		currentCatalog = this.response.catalog;
 		let currentYear;
 		returnPlan.name = externalPlan.name;
@@ -157,7 +158,20 @@ function externalPlanHandler() {
 		returnPlan.currentSemester = "" + externalPlan.currTerm + " " + externalPlan.currYear;
 		returnPlan.studentName = externalPlan.student;
 		let currentCourse;
+		/*for (const courseKey in (currentCatalog.courses)) {
+				returnPlan.courses.push(new Course(
+					courseKey,
+					currentCatalog.courses[courseKey].name,
+					currentCatalog.courses[courseKey].credits,
+					//capitalizeFirstLetter(currentCourse.term),
+					//currentCourse.year
+					console.log(Object.getOwnPropertyNames(currentCatalog.courses[courseKey]))
+					)
+				);
+		}*/
+		
 		for (let courseKey in externalPlan.courses) {
+			//console.log(courseKey)
 			currentCourse = externalPlan.courses[courseKey];
 			if (courseKey != "") {
 				returnPlan.courses.push(new Course(
@@ -167,7 +181,7 @@ function externalPlanHandler() {
 					capitalizeFirstLetter(currentCourse.term),
 					currentCourse.year)
 				);
-				
+				//console.log(Object.getOwnPropertyNames(currentCatalog.courses[courseKey]))
 			}
 		}
 		currentPlan = returnPlan;
@@ -671,6 +685,7 @@ function init(){
 	}	
 	document.getElementById("search").addEventListener("keyup", searchCourses);
 	document.getElementById("clear").addEventListener("click", clearCourses);
+	//document.getElementById("planSelect").addEventListener("change", this.form.submit());
 	document.getElementById("clear").style.cursor = "pointer";
 	pageScheduleContainer = document.getElementsByClassName("schedule-container")[0];
 	pageScheduleHeader = document.getElementById("schedule-header");

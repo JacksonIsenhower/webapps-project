@@ -4,40 +4,7 @@
 		<?php   // session2.php
 		session_start();
 		if (isset($_SESSION["loggedin"])) {
-			/*if ($stmt = $con->prepare('SELECT "subject" FROM iaj_plan_subjects WHERE plan_id = (select plan_id from iaj_plan where user_id=(select ID from iaj_user where name = ?)) and type = Major')) {
-				$stmt->bind_param('s', $_POST['username']);
-				$stmt->execute();
-				$stmt->store_result();
 			
-				// If there is a username matching, the SQL statement will return at least one row
-				if ($stmt->num_rows > 0) {
-					$stmt->bind_result($id, $password);
-					$stmt->fetch();
-					var TempMajor = $subject
-				}}
-			if ($stmt = $con->prepare('SELECT "subject" FROM iaj_plan_subjects WHERE plan_id = (select plan_id from iaj_plan where user_id=(select ID from iaj_user where name = ?)) and type = Minor')) {
-				$stmt->bind_param('s', $_POST['username']);
-				$stmt->execute();
-				$stmt->store_result();
-			
-				// If there is a username matching, the SQL statement will return at least one row
-				if ($stmt->num_rows > 0) {
-					$stmt->bind_result($id, $password);
-					$stmt->fetch();
-					var TempMinor = $subject
-				}}
-			if ($stmt = $con->prepare('SELECT "year" FROM iaj_plan_courses WHERE plan_id = (select plan_id from iaj_plan where user_id=(select ID from iaj_user where name = ?)) and type = Minor')) {
-				$stmt->bind_param('s', $_POST['username']);
-				$stmt->execute();
-				$stmt->store_result();
-			
-				// If there is a username matching, the SQL statement will return at least one row
-				if ($stmt->num_rows > 0) {
-					$stmt->bind_result($id, $password);
-					$stmt->fetch();
-					var TempYear = $year
-				}}
-				var TempName = $_SESSION["username"]*/
 		} else {
 			header("Location: ./project4_login.php");
 			die();
@@ -87,7 +54,8 @@
 							$studentMajor = "Temp Major";
 							$studentMinor = "Temp Minor";
 							$catalogYear;
-							$studentPlan = $_POST['planselect'];
+							$studentPlan = $_POST['planSelect'];
+							$_SESSION['plan'] = $_POST['planSelect'];
 							$typeRequest = "Major";
 							if ($stmt = $con->prepare("SELECT catalog, subject FROM iaj_user, iaj_plan, iaj_plan_subjects WHERE iaj_user.ID = ? AND iaj_user.ID = iaj_plan.user_id AND iaj_plan.plan_id = iaj_plan_subjects.plan_id AND iaj_plan_subjects.type = ? AND iaj_plan.default_plan = 'true'")) {
 								$stmt->bind_param('ss', $studentID, $typeRequest);
@@ -115,19 +83,7 @@
 									$studentMinor = $minor;
 								}
 							}
-							if ($stmt = $con->prepare("SELECT plan_name FROM iaj_plan WHERE iaj_plan.user_id = ?")) {
-								$stmt->bind_param('s', $studentID);
-								$stmt->execute();
-								$stmt->store_result();
-
-								// The PHP grabs the first default plan
-								if ($stmt->num_rows > 0) {
-									$stmt->bind_result($Plans);
-									$stmt->fetch();
-									//$Plans = $P;
-									//console.log($Plans);
-								}
-							}
+							
 							echo "
 								<span class='header-column'>
 									<span id='major'><strong>Major: </strong><var>$studentMajor</var></span><br>
@@ -179,16 +135,41 @@
 					<div class="schedule-ui">
 						<button>Open Notes</button><button>Delete Year</button><button>Add Year</button>
 						<?php
+							$DATABASE_HOST = 'james.cedarville.edu';
+							$DATABASE_USER = 'cs3220_sp23';
+							$DATABASE_PASS = 'E57y6Z1FwAlraEmA';
+							$DATABASE_NAME = 'cs3220_sp23';
+
+							$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+							if ( mysqli_connect_errno() ) {
+								exit('Failed to connect to MySQL: ' . mysqli_connect_error());
+							}
 							echo "
 							<FORM method='post' action='project4.php'>
-							<label for='planselect'>Plan</label>
-							<select name='planselect' id='planselect' class='planselect' >
-							</FORM>
-							"
-							/*foreach ($Plans as $plan)
-								echo"<option value='$plan'>Select</option>"
-							echo "</select>"*/
-							?>
+							<label for='planSelect'>";
+							echo "Plan";
+							echo "</label>
+							<select name='planSelect' id='planSelect' class='planSelect' onchange='this.form.submit()'>
+							<option value=''></option>
+							";
+							if ($stmt = $con->prepare("SELECT plan_id, plan_name FROM iaj_plan WHERE user_id =?")) {
+								$stmt->bind_param('s', $_SESSION['id']);
+								$stmt->execute();
+								$stmt->store_result();
+								
+								// The PHP grabs the first default plan
+								if ($stmt->num_rows > 0) {
+									$stmt->bind_result($tempPlanID, $tempPlanName);
+									while ($stmt->fetch()){
+									echo "<option value='";
+									echo $tempPlanID;
+									echo "'>";
+									echo $tempPlanName;
+									echo "</option>";}
+								}
+							}
+							echo "</select></FORM>";
+						?>
 					</div>
 				</div>
 				<div class="grid-item" id="ll-container">
@@ -213,7 +194,7 @@
 							<li><a href="../cs3220.html">Jackson Isenhower</a></li>
 						</ul>
 					</div>
-				</div
+				</div>
 				<div class="grid-item" id="lr-container">
 					<p id="showing" class="right-float">
 						Loading...

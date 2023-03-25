@@ -40,10 +40,16 @@ if ($stmt = $con->prepare('SELECT id, password FROM iaj_user WHERE name = ?')) {
 			$_SESSION['loggedin'] = TRUE;
 			$_SESSION['name'] = $_POST['username'];
 			$_SESSION['id'] = $id;
-			header("location: ../project4.html");
+			header("location: ../project4.php");
 			
 		// Incorrect password
 		} else {
+	//echo "<script language=\"JavaScript\">\n";
+	//echo "alert('Password was ";
+	//echo password_hash($_POST['password'],PASSWORD_DEFAULT);
+	//echo "');\n";
+	//echo "window.location='project4_loginpage.php'";
+	//echo "</script>";
 			badCredentials();
 		}
 		

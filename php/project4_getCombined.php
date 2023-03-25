@@ -14,10 +14,22 @@ function getCurrentTerm() {
 
 session_start();
 
+function console_log($output, $with_script_tags = true) {
+    $js_code = 'console.log(' . json_encode($output, JSON_HEX_TAG) . 
+');';
+    if ($with_script_tags) {
+        $js_code = '<script>' . $js_code . '</script>';
+    }
+    echo $js_code;
+}
+
 $DATABASE_HOST = 'james.cedarville.edu';
 $DATABASE_USER = 'cs3220_sp23';
 $DATABASE_PASS = 'E57y6Z1FwAlraEmA';
 $DATABASE_NAME = 'cs3220_sp23';
+$combined = array();
+$plan = array();
+$catalog = array();
 
 if (!isset($_SESSION['id'])) {
 	//exit('No user provided');
@@ -41,17 +53,17 @@ if (!isset($_SESSION['plan']) && $stmt = $con->prepare("SELECT plan_id FROM iaj_
 		$stmt->fetch();
 		
 		$_SESSION['plan'] = $planID;
+		//console.log($_SESSION['plan'])
+		//console_log($_SESSION['plan']);
 	}
 	else {
 		$_SESSION['plan'] = null;
 	}
-
+	//console_log($_SESSION['plan']);
 	$stmt->close();
-}
+}// else {$_SESSION['plan'] = "test";}
 
-$combined = array();
-$plan = array();
-$catalog = array();
+//$_SESSION['plan'] = "54321";
 
 // Hit the database tables to get the Plan information
 if ($stmt = $con->prepare('SELECT iaj_user.name, iaj_plan.plan_id, iaj_plan.plan_name, iaj_plan.catalog FROM iaj_user, iaj_plan WHERE iaj_plan.plan_id = ?')) {
