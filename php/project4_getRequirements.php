@@ -14,10 +14,10 @@ function getCurrentTerm() {
 
 session_start();
 
-$DATABASE_HOST = 'localhost';
-$DATABASE_USER = 'root';
-$DATABASE_PASS = '';
-$DATABASE_NAME = 'test';
+$DATABASE_HOST = 'james.cedarville.edu';
+$DATABASE_USER = 'cs3220_sp23';
+$DATABASE_PASS = 'E57y6Z1FwAlraEmA';
+$DATABASE_NAME = 'cs3220_sp23';
 
 if (!isset($_SESSION['id'])) {
 	//exit('No user provided');

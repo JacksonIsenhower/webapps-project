@@ -51,14 +51,14 @@
 							}
 							$studentName = $_SESSION["name"];
 							$studentID = $_SESSION['id'];
-							$studentMajor = "Temp Major";
-							$studentMinor = "Temp Minor";
+							$studentMajor = "";
+							$studentMinor = "";
 							$catalogYear;
 							$studentPlan = $_POST['planSelect'];
 							$_SESSION['plan'] = $_POST['planSelect'];
 							$typeRequest = "Major";
-							if ($stmt = $con->prepare("SELECT catalog, subject FROM iaj_user, iaj_plan, iaj_plan_subjects WHERE iaj_user.ID = ? AND iaj_user.ID = iaj_plan.user_id AND iaj_plan.plan_id = iaj_plan_subjects.plan_id AND iaj_plan_subjects.type = ? AND iaj_plan.default_plan = 'true'")) {
-								$stmt->bind_param('ss', $studentID, $typeRequest);
+							if ($stmt = $con->prepare("SELECT catalog, subject FROM iaj_user, iaj_plan, iaj_plan_subjects WHERE iaj_user.ID = ? AND iaj_user.ID = iaj_plan.user_id AND iaj_plan.plan_id = iaj_plan_subjects.plan_id AND iaj_plan_subjects.type = ? AND iaj_plan.plan_id = ?")) {
+								$stmt->bind_param('sss', $studentID, $typeRequest, $_SESSION['plan']);
 								$stmt->execute();
 								$stmt->store_result();
 
@@ -71,8 +71,8 @@
 								}
 							}
 							$typeRequest = "Minor";
-							if ($stmt = $con->prepare("SELECT subject FROM iaj_user, iaj_plan, iaj_plan_subjects WHERE iaj_user.ID = ? AND iaj_user.ID = iaj_plan.user_id AND iaj_plan.plan_id = iaj_plan_subjects.plan_id AND iaj_plan_subjects.type = ? AND iaj_plan.default_plan = 'true'")) {
-								$stmt->bind_param('ss', $studentID, $typeRequest);
+							if ($stmt = $con->prepare("SELECT subject FROM iaj_user, iaj_plan, iaj_plan_subjects WHERE iaj_user.ID = ? AND iaj_user.ID = iaj_plan.user_id AND iaj_plan.plan_id = iaj_plan_subjects.plan_id AND iaj_plan_subjects.type = ? AND iaj_plan.plan_id = ?")) {
+								$stmt->bind_param('sss', $studentID, $typeRequest, $_SESSION['plan']);
 								$stmt->execute();
 								$stmt->store_result();
 
@@ -81,6 +81,12 @@
 									$stmt->bind_result($minor);
 									$stmt->fetch();
 									$studentMinor = $minor;
+									while ($stmt->fetch()){
+									$studentMinor .= " & ";
+									$studentMinor .= $minor;
+									}
+								} else {
+									$studentMinor = "none";
 								}
 							}
 							

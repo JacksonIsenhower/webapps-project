@@ -230,9 +230,14 @@ function isCourseOnPlan(id) {
 }
 
 function loadRequirements() {
+<<<<<<< Updated upstream
 	parser = new DOMParser();
 	let requirements = parser.parseFromString(this,"text/xml");
 	//console.log("LoadRequirements:"+requirements);
+=======
+	let requirements = this.response.categories;
+	console.log(requirements);
+>>>>>>> Stashed changes
 	let currentCourseName = "";
 	
 	// Load Core Classes
